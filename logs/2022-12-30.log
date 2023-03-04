@@ -1,0 +1,332 @@
+[2022-12-30 19:29:07,914] - [INFO] - [2a3db249-70a9-4e72-a2d8-362064c91c48] - [create_accounts] - [<module>] - No Emails Provided to Register
+[2022-12-30 19:29:14,341] - [WARNING] - [5e92f8e6-b38b-4f08-b09c-02e75f2db1a8] - [create_accounts] - [<module>] - No Emails Provided to Register
+[2022-12-30 19:29:23,353] - [WARNING] - [330955d6-9636-41d7-a37e-79d09aeec9e3] - [create_accounts] - [<module>] - No Emails Provided to Register
+[2022-12-30 19:36:12,052] - [INFO] - [dd42cc39-9aec-4b77-a8e6-49f3a68ce40f] - [create_accounts] - [<module>] - Attempting to Register 4 Emails with ESPN
+[2022-12-30 19:54:09,647] - [ERROR] - [0fbb4ff8-8a49-4d5e-a376-d2d03765fe53] - [__init__] - [exception_handler] - Uncaught Exception
+Traceback (most recent call last):
+  File "/Users/alecmasterson/Documents/march_madness/create_accounts.py", line 180, in <module>
+    emails = [INPUT_EMAIL.replace("####", email) for email in range(int(temp[0]), int(temp[1]))]
+  File "/Users/alecmasterson/Documents/march_madness/create_accounts.py", line 180, in <listcomp>
+    emails = [INPUT_EMAIL.replace("####", email) for email in range(int(temp[0]), int(temp[1]))]
+TypeError: replace() argument 2 must be str, not int
+[2022-12-30 19:54:51,349] - [INFO] - [28278b3c-d433-4ce5-8c50-9a3d7832cb7c] - [create_accounts] - [<module>] - Attempting to Register 102 Emails with ESPN
+[2022-12-30 19:55:01,045] - [INFO] - [4c46e6e4-890b-4fb5-b3d4-886e7caf0134] - [create_accounts] - [<module>] - Attempting to Register 102 Emails with ESPN
+[2022-12-30 19:55:10,190] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+399@gmail.com
+[2022-12-30 19:55:10,280] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+400@gmail.com
+[2022-12-30 19:55:10,305] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+401@gmail.com
+[2022-12-30 19:55:10,357] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+402@gmail.com
+[2022-12-30 19:55:16,632] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+404@gmail.com
+[2022-12-30 19:55:16,672] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+406@gmail.com
+[2022-12-30 19:55:16,781] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+403@gmail.com
+[2022-12-30 19:55:16,826] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+405@gmail.com
+[2022-12-30 19:55:23,194] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+410@gmail.com
+[2022-12-30 19:55:23,240] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+409@gmail.com
+[2022-12-30 19:55:23,240] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+407@gmail.com
+[2022-12-30 19:55:23,289] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+408@gmail.com
+[2022-12-30 19:55:29,037] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+412@gmail.com
+[2022-12-30 19:55:29,391] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+413@gmail.com
+[2022-12-30 19:55:29,510] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+411@gmail.com
+[2022-12-30 19:55:29,590] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+414@gmail.com
+[2022-12-30 19:55:34,458] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+415@gmail.com
+[2022-12-30 19:55:35,079] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+416@gmail.com
+[2022-12-30 19:55:35,363] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+417@gmail.com
+[2022-12-30 19:55:35,496] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+418@gmail.com
+[2022-12-30 19:55:40,192] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+419@gmail.com
+[2022-12-30 19:55:40,512] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+420@gmail.com
+[2022-12-30 19:55:41,037] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+422@gmail.com
+[2022-12-30 19:55:41,126] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+421@gmail.com
+[2022-12-30 19:55:45,985] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+423@gmail.com
+[2022-12-30 19:55:46,188] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+424@gmail.com
+[2022-12-30 19:55:46,757] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+426@gmail.com
+[2022-12-30 19:55:46,799] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+425@gmail.com
+[2022-12-30 19:55:51,856] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+427@gmail.com
+[2022-12-30 19:55:51,944] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+428@gmail.com
+[2022-12-30 19:55:52,740] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+430@gmail.com
+[2022-12-30 19:55:52,843] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+429@gmail.com
+[2022-12-30 19:55:57,472] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+431@gmail.com
+[2022-12-30 19:55:57,983] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+432@gmail.com
+[2022-12-30 19:55:58,512] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+434@gmail.com
+[2022-12-30 19:55:58,840] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+433@gmail.com
+[2022-12-30 19:56:03,288] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+435@gmail.com
+[2022-12-30 19:56:03,615] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+436@gmail.com
+[2022-12-30 19:56:04,165] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+437@gmail.com
+[2022-12-30 19:56:04,301] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+438@gmail.com
+[2022-12-30 19:56:09,323] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+439@gmail.com
+[2022-12-30 19:56:09,413] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+440@gmail.com
+[2022-12-30 19:56:09,959] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+441@gmail.com
+[2022-12-30 19:56:10,017] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+442@gmail.com
+[2022-12-30 19:56:15,206] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+444@gmail.com
+[2022-12-30 19:56:15,266] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+443@gmail.com
+[2022-12-30 19:56:15,820] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+446@gmail.com
+[2022-12-30 19:56:15,920] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+445@gmail.com
+[2022-12-30 19:56:21,106] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+448@gmail.com
+[2022-12-30 19:56:21,140] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+447@gmail.com
+[2022-12-30 19:56:21,654] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+449@gmail.com
+[2022-12-30 19:56:21,800] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+450@gmail.com
+[2022-12-30 19:56:27,199] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+452@gmail.com
+[2022-12-30 19:56:27,222] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+451@gmail.com
+[2022-12-30 19:56:27,513] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+453@gmail.com
+[2022-12-30 19:56:27,635] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+454@gmail.com
+[2022-12-30 19:56:33,555] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+456@gmail.com
+[2022-12-30 19:56:33,721] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+455@gmail.com
+[2022-12-30 19:56:34,148] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+458@gmail.com
+[2022-12-30 19:56:34,208] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+457@gmail.com
+[2022-12-30 19:56:39,649] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+459@gmail.com
+[2022-12-30 19:56:39,910] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+460@gmail.com
+[2022-12-30 19:56:39,959] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+462@gmail.com
+[2022-12-30 19:56:40,117] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+461@gmail.com
+[2022-12-30 19:56:43,168] - [ERROR] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+465@gmail.com
+[2022-12-30 19:56:45,600] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+463@gmail.com
+[2022-12-30 19:56:46,167] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+464@gmail.com
+[2022-12-30 19:56:46,242] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+466@gmail.com
+[2022-12-30 19:56:49,019] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+467@gmail.com
+[2022-12-30 19:56:51,256] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+468@gmail.com
+[2022-12-30 19:56:51,812] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+469@gmail.com
+[2022-12-30 19:56:51,958] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+470@gmail.com
+[2022-12-30 19:56:54,577] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+471@gmail.com
+[2022-12-30 19:56:57,014] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+472@gmail.com
+[2022-12-30 19:56:57,646] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+473@gmail.com
+[2022-12-30 19:56:57,717] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+474@gmail.com
+[2022-12-30 19:56:59,662] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+475@gmail.com
+[2022-12-30 19:57:02,508] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+476@gmail.com
+[2022-12-30 19:57:03,371] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+478@gmail.com
+[2022-12-30 19:57:03,494] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+477@gmail.com
+[2022-12-30 19:57:05,173] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+479@gmail.com
+[2022-12-30 19:57:08,255] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+480@gmail.com
+[2022-12-30 19:57:09,027] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+481@gmail.com
+[2022-12-30 19:57:09,139] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+482@gmail.com
+[2022-12-30 19:57:10,777] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+483@gmail.com
+[2022-12-30 19:57:13,944] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+484@gmail.com
+[2022-12-30 19:57:14,536] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+485@gmail.com
+[2022-12-30 19:57:15,119] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+486@gmail.com
+[2022-12-30 19:57:16,087] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+487@gmail.com
+[2022-12-30 19:57:19,408] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+488@gmail.com
+[2022-12-30 19:57:20,068] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+489@gmail.com
+[2022-12-30 19:57:20,754] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+490@gmail.com
+[2022-12-30 19:57:21,530] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+491@gmail.com
+[2022-12-30 19:57:24,823] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+492@gmail.com
+[2022-12-30 19:57:25,556] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+493@gmail.com
+[2022-12-30 19:57:26,362] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+494@gmail.com
+[2022-12-30 19:57:27,127] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+495@gmail.com
+[2022-12-30 19:57:30,184] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+496@gmail.com
+[2022-12-30 19:57:31,122] - [WARNING] - [1d457cb6-257b-4bd3-bf0e-ab7db25fa236] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+497@gmail.com
+[2022-12-30 19:57:31,824] - [WARNING] - [f7704e65-429b-4ec7-9c76-267fda54bf8c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+498@gmail.com
+[2022-12-30 19:57:32,704] - [WARNING] - [730cd30b-325d-4632-90c5-8b99df4724cb] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+499@gmail.com
+[2022-12-30 19:57:35,026] - [WARNING] - [12f3cdf6-f979-477b-b131-dbd9bfbe812c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+500@gmail.com
+[2022-12-30 19:57:35,155] - [INFO] - [4c46e6e4-890b-4fb5-b3d4-886e7caf0134] - [create_accounts] - [main] - ['465']
+[2022-12-30 19:58:45,950] - [INFO] - [723d88fc-1eca-465e-9a95-ebc27489f5a6] - [create_accounts] - [<module>] - Attempting to Register 1 Emails with ESPN
+[2022-12-30 19:58:50,822] - [WARNING] - [d71dcb69-0a4a-49dd-9774-ed181999323d] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+465@gmail.com
+[2022-12-30 19:58:50,915] - [INFO] - [723d88fc-1eca-465e-9a95-ebc27489f5a6] - [create_accounts] - [main] - []
+[2022-12-30 20:00:27,235] - [INFO] - [8625a203-919b-49b3-827b-be858ea4a994] - [create_accounts] - [<module>] - Attempting to Register 201 Emails with ESPN
+[2022-12-30 20:00:33,801] - [WARNING] - [4f44173f-25c2-44c0-989c-841a2bd29a9e] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+500@gmail.com
+[2022-12-30 20:00:53,344] - [ERROR] - [4f44173f-25c2-44c0-989c-841a2bd29a9e] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+512@gmail.com
+[2022-12-30 20:08:33,134] - [INFO] - [8625a203-919b-49b3-827b-be858ea4a994] - [create_accounts] - [main] - ['512']
+[2022-12-30 20:08:39,680] - [INFO] - [0fe34ddc-31fe-4d6d-a938-9758f2d254dd] - [create_accounts] - [<module>] - Attempting to Register 1 Emails with ESPN
+[2022-12-30 20:08:48,457] - [INFO] - [0fe34ddc-31fe-4d6d-a938-9758f2d254dd] - [create_accounts] - [main] - []
+[2022-12-30 20:25:35,995] - [INFO] - [4a6344f8-c0cc-4850-b548-39c64b06dafb] - [create_accounts] - [<module>] - Attempting to Register 11 Email(s) with ESPN
+[2022-12-30 20:25:42,941] - [WARNING] - [81edcba1-7e99-48c3-b5e4-949e23373427] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+700@gmail.com
+[2022-12-30 20:26:04,582] - [INFO] - [4a6344f8-c0cc-4850-b548-39c64b06dafb] - [create_accounts] - [main] - []
+[2022-12-30 20:26:24,606] - [INFO] - [3f0c54d4-3bcd-4b2c-a93b-83b4aab8d5e0] - [create_accounts] - [<module>] - Attempting to Register 91 Email(s) with ESPN
+[2022-12-30 20:26:31,284] - [WARNING] - [75f92295-f150-4ace-a90f-e8f59b55349d] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+710@gmail.com
+[2022-12-30 20:30:05,866] - [INFO] - [3f0c54d4-3bcd-4b2c-a93b-83b4aab8d5e0] - [create_accounts] - [main] - []
+[2022-12-30 20:34:23,691] - [INFO] - [91f3423a-5579-426e-bbc7-6a3dbd2a5952] - [create_accounts] - [<module>] - Attempting to Register 201 Email(s) with ESPN
+[2022-12-30 20:34:30,431] - [WARNING] - [8d1c3e17-d027-4a3a-8d64-3c7626eb8282] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+800@gmail.com
+[2022-12-30 20:42:23,739] - [INFO] - [91f3423a-5579-426e-bbc7-6a3dbd2a5952] - [create_accounts] - [main] - []
+[2022-12-30 22:41:28,622] - [INFO] - [c6802541-f690-49dd-b1d4-e34892ba92ef] - [create_accounts] - [<module>] - Attempting to Register 201 Email(s) with ESPN
+[2022-12-30 22:42:03,498] - [WARNING] - [955417dc-de68-4b3f-b67c-fc21d32d52ec] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1000@gmail.com
+[2022-12-30 22:42:49,376] - [ERROR] - [eead5b2f-628b-4abd-8d06-7496578e1a24] - [create_accounts] - [register_wrapper] - TIMEOUT - Failed to Register Emai: alecjmasterson+1033@gmail.com
+[2022-12-30 22:43:31,662] - [ERROR] - [ffc89b32-e7f5-47eb-b4c4-54f6619defde] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1080@gmail.com
+[2022-12-30 22:43:45,800] - [ERROR] - [9eb45733-5f1c-47c4-a3e2-6c247201c942] - [create_accounts] - [register_wrapper] - TIMEOUT - Failed to Register Emai: alecjmasterson+1083@gmail.com
+[2022-12-30 22:44:05,044] - [ERROR] - [446d9d55-0aba-4ed0-9403-e3fd0c10cbc2] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1087@gmail.com
+[2022-12-30 22:44:18,911] - [ERROR] - [baa1741c-974c-4182-a095-2b77f349c9e0] - [create_accounts] - [register_wrapper] - TIMEOUT - Failed to Register Emai: alecjmasterson+1098@gmail.com
+[2022-12-30 22:44:38,895] - [ERROR] - [baa1741c-974c-4182-a095-2b77f349c9e0] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1137@gmail.com
+[2022-12-30 22:44:39,122] - [ERROR] - [030c6cad-8977-4707-9818-ce91c55e6a5e] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1133@gmail.com
+[2022-12-30 22:45:19,434] - [ERROR] - [030c6cad-8977-4707-9818-ce91c55e6a5e] - [create_accounts] - [register_wrapper] - TIMEOUT - Failed to Register Emai: alecjmasterson+1140@gmail.com
+[2022-12-30 22:45:18,859] - [ERROR] - [baa1741c-974c-4182-a095-2b77f349c9e0] - [create_accounts] - [register_wrapper] - TIMEOUT - Failed to Register Emai: alecjmasterson+1139@gmail.com
+[2022-12-30 22:45:21,806] - [ERROR] - [eaadc7e5-ff18-4658-8ae5-ccf580ec3ed9] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1143@gmail.com
+[2022-12-30 22:45:23,028] - [ERROR] - [446d9d55-0aba-4ed0-9403-e3fd0c10cbc2] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1142@gmail.com
+[2022-12-30 22:45:29,347] - [ERROR] - [baa1741c-974c-4182-a095-2b77f349c9e0] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1148@gmail.com
+[2022-12-30 22:45:29,347] - [ERROR] - [030c6cad-8977-4707-9818-ce91c55e6a5e] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1147@gmail.com
+[2022-12-30 22:45:29,416] - [ERROR] - [eaadc7e5-ff18-4658-8ae5-ccf580ec3ed9] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1149@gmail.com
+[2022-12-30 22:45:29,381] - [ERROR] - [4f2c8372-4c6a-4d8c-b0de-4d3529aace6e] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1144@gmail.com
+[2022-12-30 22:45:29,462] - [ERROR] - [446d9d55-0aba-4ed0-9403-e3fd0c10cbc2] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1150@gmail.com
+[2022-12-30 22:45:29,477] - [ERROR] - [bca93949-e2cf-430a-8b4f-6a3eb1f9d925] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1146@gmail.com
+[2022-12-30 22:45:29,595] - [ERROR] - [2b41fa9b-0be4-4143-a72e-ac6bbfee9aec] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1145@gmail.com
+[2022-12-30 22:49:25,101] - [ERROR] - [8d674ec2-7385-4360-9690-f6fab7d53e41] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1110@gmail.com
+[2022-12-30 22:49:25,098] - [ERROR] - [84ed4d41-366c-4ff7-bacd-2c75f7c607a3] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1104@gmail.com
+[2022-12-30 22:49:25,103] - [ERROR] - [0bcc8779-8f8b-408c-8ebf-18280e20dc1f] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1115@gmail.com
+[2022-12-30 22:49:25,106] - [ERROR] - [1b9673d1-fd64-41d0-82ca-7188f744e96f] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1106@gmail.com
+[2022-12-30 22:49:25,225] - [ERROR] - [b9435ffb-0550-48eb-8fdf-4441c4cb842f] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1107@gmail.com
+[2022-12-30 22:49:25,228] - [ERROR] - [44568425-6ff2-453d-bec0-34434495d9f4] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1108@gmail.com
+[2022-12-30 22:49:25,221] - [ERROR] - [4666607d-b9e6-4436-b0d6-482e706da645] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1094@gmail.com
+[2022-12-30 22:49:25,229] - [ERROR] - [7a0ae1e8-035e-4011-93dc-892ce50e98b2] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1114@gmail.com
+[2022-12-30 22:49:25,239] - [ERROR] - [8cde61b0-e855-4731-afb6-0877a860b5ad] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1111@gmail.com
+[2022-12-30 22:49:25,327] - [ERROR] - [eebe9822-fd60-4918-93bb-e5c19e01ecfe] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1091@gmail.com
+[2022-12-30 22:49:25,354] - [ERROR] - [adc910b0-2c26-4829-98e2-e5259176f771] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1113@gmail.com
+[2022-12-30 22:49:25,357] - [ERROR] - [7e9ff69d-c038-4ea9-9372-9ff7d63f4c96] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1109@gmail.com
+[2022-12-30 22:49:25,387] - [ERROR] - [e1851ed7-cbcd-4720-a9ec-54b5df190d49] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1119@gmail.com
+[2022-12-30 22:49:25,397] - [ERROR] - [048b5696-1efa-4972-a00f-6d269d345113] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1112@gmail.com
+[2022-12-30 22:49:25,405] - [ERROR] - [5af40efe-fb3a-4b6b-8ba2-d3defef80c17] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1116@gmail.com
+[2022-12-30 22:49:34,792] - [INFO] - [2203585b-4aa8-4d06-9bd9-ac65490cd4a8] - [create_accounts] - [<module>] - Attempting to Register 201 Email(s) with ESPN
+[2022-12-30 22:49:44,772] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1002@gmail.com
+[2022-12-30 22:49:44,893] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1005@gmail.com
+[2022-12-30 22:49:44,972] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1001@gmail.com
+[2022-12-30 22:49:45,019] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1003@gmail.com
+[2022-12-30 22:49:45,056] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1000@gmail.com
+[2022-12-30 22:49:45,150] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1006@gmail.com
+[2022-12-30 22:49:45,180] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1007@gmail.com
+[2022-12-30 22:49:45,262] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1004@gmail.com
+[2022-12-30 22:49:54,965] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1010@gmail.com
+[2022-12-30 22:49:55,116] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1015@gmail.com
+[2022-12-30 22:49:55,278] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1011@gmail.com
+[2022-12-30 22:49:55,278] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1012@gmail.com
+[2022-12-30 22:49:55,322] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1008@gmail.com
+[2022-12-30 22:49:55,424] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1009@gmail.com
+[2022-12-30 22:49:55,447] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1014@gmail.com
+[2022-12-30 22:49:55,574] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1013@gmail.com
+[2022-12-30 22:50:04,813] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1022@gmail.com
+[2022-12-30 22:50:05,024] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1016@gmail.com
+[2022-12-30 22:50:05,051] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1021@gmail.com
+[2022-12-30 22:50:05,163] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1023@gmail.com
+[2022-12-30 22:50:05,244] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1017@gmail.com
+[2022-12-30 22:50:05,284] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1018@gmail.com
+[2022-12-30 22:50:05,313] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1019@gmail.com
+[2022-12-30 22:50:05,350] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1020@gmail.com
+[2022-12-30 22:50:13,376] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1024@gmail.com
+[2022-12-30 22:50:14,920] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1025@gmail.com
+[2022-12-30 22:50:15,097] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1028@gmail.com
+[2022-12-30 22:50:15,230] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1030@gmail.com
+[2022-12-30 22:50:15,372] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1026@gmail.com
+[2022-12-30 22:50:15,398] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1027@gmail.com
+[2022-12-30 22:50:15,400] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1029@gmail.com
+[2022-12-30 22:50:15,465] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1031@gmail.com
+[2022-12-30 22:50:20,059] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1032@gmail.com
+[2022-12-30 22:50:25,050] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1035@gmail.com
+[2022-12-30 22:50:25,440] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1036@gmail.com
+[2022-12-30 22:50:25,479] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1034@gmail.com
+[2022-12-30 22:50:25,590] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1038@gmail.com
+[2022-12-30 22:50:25,788] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1037@gmail.com
+[2022-12-30 22:50:25,841] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1039@gmail.com
+[2022-12-30 22:50:28,381] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1040@gmail.com
+[2022-12-30 22:50:35,248] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1042@gmail.com
+[2022-12-30 22:50:35,287] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1043@gmail.com
+[2022-12-30 22:50:35,429] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1045@gmail.com
+[2022-12-30 22:50:35,517] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1044@gmail.com
+[2022-12-30 22:50:35,537] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1046@gmail.com
+[2022-12-30 22:50:35,602] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1041@gmail.com
+[2022-12-30 22:50:37,463] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1047@gmail.com
+[2022-12-30 22:50:37,743] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1048@gmail.com
+[2022-12-30 22:50:45,433] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1053@gmail.com
+[2022-12-30 22:50:45,572] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1051@gmail.com
+[2022-12-30 22:50:45,608] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1050@gmail.com
+[2022-12-30 22:50:45,648] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1054@gmail.com
+[2022-12-30 22:50:45,665] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1049@gmail.com
+[2022-12-30 22:50:45,790] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1052@gmail.com
+[2022-12-30 22:50:46,090] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1056@gmail.com
+[2022-12-30 22:50:46,166] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1055@gmail.com
+[2022-12-30 22:50:55,469] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1059@gmail.com
+[2022-12-30 22:50:55,572] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1057@gmail.com
+[2022-12-30 22:50:55,783] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1062@gmail.com
+[2022-12-30 22:50:55,919] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1060@gmail.com
+[2022-12-30 22:50:55,959] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1063@gmail.com
+[2022-12-30 22:50:56,057] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1058@gmail.com
+[2022-12-30 22:50:56,114] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1064@gmail.com
+[2022-12-30 22:50:56,173] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1061@gmail.com
+[2022-12-30 22:51:04,910] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1065@gmail.com
+[2022-12-30 22:51:05,507] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1069@gmail.com
+[2022-12-30 22:51:05,658] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1071@gmail.com
+[2022-12-30 22:51:05,705] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1067@gmail.com
+[2022-12-30 22:51:05,810] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1072@gmail.com
+[2022-12-30 22:51:05,848] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1068@gmail.com
+[2022-12-30 22:51:05,881] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1066@gmail.com
+[2022-12-30 22:51:06,025] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1070@gmail.com
+[2022-12-30 22:51:13,973] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1073@gmail.com
+[2022-12-30 22:51:14,066] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1074@gmail.com
+[2022-12-30 22:51:15,650] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1079@gmail.com
+[2022-12-30 22:51:15,817] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1076@gmail.com
+[2022-12-30 22:51:15,916] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1078@gmail.com
+[2022-12-30 22:51:16,034] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1077@gmail.com
+[2022-12-30 22:51:16,102] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1075@gmail.com
+[2022-12-30 22:51:22,049] - [ERROR] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1085@gmail.com
+[2022-12-30 22:51:22,438] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1082@gmail.com
+[2022-12-30 22:51:22,758] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1081@gmail.com
+[2022-12-30 22:51:25,162] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1084@gmail.com
+[2022-12-30 22:51:25,721] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1086@gmail.com
+[2022-12-30 22:51:31,214] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1088@gmail.com
+[2022-12-30 22:51:31,308] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1090@gmail.com
+[2022-12-30 22:51:31,397] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1089@gmail.com
+[2022-12-30 22:51:34,532] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1093@gmail.com
+[2022-12-30 22:51:34,645] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1092@gmail.com
+[2022-12-30 22:51:38,561] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1095@gmail.com
+[2022-12-30 22:51:39,789] - [ERROR] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1100@gmail.com
+[2022-12-30 22:51:40,465] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1098@gmail.com
+[2022-12-30 22:51:41,243] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1096@gmail.com
+[2022-12-30 22:51:41,347] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1097@gmail.com
+[2022-12-30 22:51:43,647] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1101@gmail.com
+[2022-12-30 22:51:46,959] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1102@gmail.com
+[2022-12-30 22:52:02,882] - [ERROR] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1118@gmail.com
+[2022-12-30 22:52:03,026] - [ERROR] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1117@gmail.com
+[2022-12-30 22:52:26,685] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1131@gmail.com
+[2022-12-30 22:52:27,235] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1132@gmail.com
+[2022-12-30 22:52:27,318] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1134@gmail.com
+[2022-12-30 22:52:36,275] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1138@gmail.com
+[2022-12-30 22:52:36,503] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1135@gmail.com
+[2022-12-30 22:52:36,563] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1139@gmail.com
+[2022-12-30 22:52:36,624] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1136@gmail.com
+[2022-12-30 22:52:36,703] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1140@gmail.com
+[2022-12-30 22:52:36,723] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1141@gmail.com
+[2022-12-30 22:52:56,014] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1151@gmail.com
+[2022-12-30 22:52:58,906] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1152@gmail.com
+[2022-12-30 22:52:59,292] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1156@gmail.com
+[2022-12-30 22:52:59,321] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1153@gmail.com
+[2022-12-30 22:52:59,365] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1154@gmail.com
+[2022-12-30 22:52:59,449] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1155@gmail.com
+[2022-12-30 22:53:01,977] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1157@gmail.com
+[2022-12-30 22:53:02,397] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1158@gmail.com
+[2022-12-30 22:53:03,842] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1159@gmail.com
+[2022-12-30 22:53:07,430] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1160@gmail.com
+[2022-12-30 22:53:08,432] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1162@gmail.com
+[2022-12-30 22:53:08,545] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1163@gmail.com
+[2022-12-30 22:53:08,639] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1161@gmail.com
+[2022-12-30 22:53:08,733] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1164@gmail.com
+[2022-12-30 22:53:12,511] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1165@gmail.com
+[2022-12-30 22:53:12,548] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1166@gmail.com
+[2022-12-30 22:53:12,731] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1167@gmail.com
+[2022-12-30 22:53:16,112] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1168@gmail.com
+[2022-12-30 22:53:18,169] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1170@gmail.com
+[2022-12-30 22:53:18,169] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1169@gmail.com
+[2022-12-30 22:53:18,352] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1171@gmail.com
+[2022-12-30 22:53:18,420] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1172@gmail.com
+[2022-12-30 22:53:22,291] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1173@gmail.com
+[2022-12-30 22:53:22,322] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1174@gmail.com
+[2022-12-30 22:53:22,383] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1175@gmail.com
+[2022-12-30 22:53:24,298] - [ERROR] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - NOSUCHELEMENT - Failed to Register Email: alecjmasterson+1177@gmail.com
+[2022-12-30 22:53:25,090] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1176@gmail.com
+[2022-12-30 22:53:28,010] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1180@gmail.com
+[2022-12-30 22:53:28,080] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1179@gmail.com
+[2022-12-30 22:53:28,179] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1178@gmail.com
+[2022-12-30 22:53:31,852] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1183@gmail.com
+[2022-12-30 22:53:31,985] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1181@gmail.com
+[2022-12-30 22:53:32,026] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1182@gmail.com
+[2022-12-30 22:53:32,488] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1184@gmail.com
+[2022-12-30 22:53:33,962] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1185@gmail.com
+[2022-12-30 22:53:37,270] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1187@gmail.com
+[2022-12-30 22:53:37,603] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1188@gmail.com
+[2022-12-30 22:53:38,096] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1186@gmail.com
+[2022-12-30 22:53:42,391] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1190@gmail.com
+[2022-12-30 22:53:42,489] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1193@gmail.com
+[2022-12-30 22:53:42,579] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1191@gmail.com
+[2022-12-30 22:53:42,620] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1192@gmail.com
+[2022-12-30 22:53:42,687] - [WARNING] - [3f950d66-ec31-4a43-b5f7-fd77c8fc27f2] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1189@gmail.com
+[2022-12-30 22:53:45,001] - [WARNING] - [018655f0-df48-43eb-b733-d6f97f9fb669] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1195@gmail.com
+[2022-12-30 22:53:45,053] - [WARNING] - [dc630354-48a4-4217-aa8e-4638528ccd83] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1194@gmail.com
+[2022-12-30 22:53:46,874] - [WARNING] - [d5cd993f-0ce5-4773-906f-7433822a1a16] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1196@gmail.com
+[2022-12-30 22:53:50,276] - [WARNING] - [d8717485-9d03-4781-b4df-aadb992a071c] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1198@gmail.com
+[2022-12-30 22:53:50,335] - [WARNING] - [3e0e5333-5394-4f40-93f3-350d28fbe3cc] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1197@gmail.com
+[2022-12-30 22:53:50,367] - [WARNING] - [f53729ab-6928-4453-815c-76f1de2884a7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1199@gmail.com
+[2022-12-30 22:53:50,448] - [WARNING] - [2592892c-bd7a-435d-8d4a-f93ba90f7508] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1200@gmail.com
+[2022-12-30 22:53:50,605] - [INFO] - [2203585b-4aa8-4d06-9bd9-ac65490cd4a8] - [create_accounts] - [main] - ['1085', '1100', '1117', '1118', '1177']
+[2022-12-30 22:54:42,117] - [INFO] - [b2cc1bbe-80f8-4e33-b6ac-7d06b6f2a3c4] - [create_accounts] - [<module>] - Attempting to Register 5 Email(s) with ESPN
+[2022-12-30 22:54:48,654] - [WARNING] - [e6a31a14-ae3b-4109-9e1f-75a2484c2654] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1085@gmail.com
+[2022-12-30 22:54:49,371] - [WARNING] - [708c9f80-d28a-487d-ad23-5317d37dbcf7] - [create_accounts] - [register_wrapper] - Email Taken: alecjmasterson+1177@gmail.com
+[2022-12-30 22:54:52,993] - [INFO] - [b2cc1bbe-80f8-4e33-b6ac-7d06b6f2a3c4] - [create_accounts] - [main] - []
