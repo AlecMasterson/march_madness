@@ -21,10 +21,3 @@ class Game:
         team2Str = self.team2.team_name if self.team2 is not None else ""
 
         return f"{team1Str} vs. {team2Str}"
-
-    def setter(self, dir: str, node: Game) -> Game:
-        if dir == "L":
-            self.left = node
-        if dir == "R":
-            self.right = node
-        return node

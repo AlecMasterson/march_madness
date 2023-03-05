@@ -1,4 +1,6 @@
+from exceptions.BracketSubmissionException import BracketSubmissionException
 from exceptions.EmailTakenException import EmailTakenException
+from exceptions.InvalidEmailException import InvalidEmailException
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
@@ -8,6 +10,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from typing import List, Union
+import requests
 import time
 
 
@@ -15,6 +18,7 @@ ELEMENT_ERROR = "input-error"
 ELEMENT_FORM = "//form"
 ELEMENT_IFRAME = "//iframe[@name='oneid-iframe']"
 ELEMENT_INPUT_BUTTON_SIGNUP = "//button[@id='BtnCreateAccount']"
+ELEMENT_INPUT_BUTTON_SUBMIT = "//button[@id='BtnSubmit']"
 ELEMENT_INPUT_TEXT_EMAIL = "//input[@type='email']"
 ELEMENT_INPUT_TEXT_NAME_FIRST = "//input[@id='InputFirstName']"
 ELEMENT_INPUT_TEXT_NAME_LAST = "//input[@id='InputLastName']"
@@ -22,10 +26,10 @@ ELEMENT_INPUT_TEXT_PASSWORD = "//input[@type='password']"
 
 INPUT_NAME_FIRST = "Alec"
 INPUT_NAME_LAST = "Masterson"
-INPUT_PASSWORD = ""
 
 URL_LOGIN = "https://www.espn.com/login"
-
+URL_SUBMIT = "https://fantasy.espn.com/tournament-challenge-bracket/2023/en/createOrUpdateEntry"
+URL_VALIDATE_EMAIL = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD/validate"
 
 class ESPN:
 
@@ -41,7 +45,7 @@ class ESPN:
 
     def __enter__(self):
         self.__Driver = self.__create_driver()
-        self.__DriverWait = WebDriverWait(self.__Driver, timeout=8)
+        self.__DriverWait = WebDriverWait(self.__Driver, timeout=10)
 
         return self
 
@@ -62,7 +66,10 @@ class ESPN:
             A Selenium WebDriver instance to navigate ESPN.
         """
         driver_options: Options = Options()
+        driver_options.add_argument("--disable-dev-shm-usage")
         driver_options.add_argument("--headless")
+        driver_options.add_argument('--log-level=3')
+        driver_options.add_argument('--no-sandbox')
 
         return webdriver.Chrome(options=driver_options)
 
@@ -98,10 +105,33 @@ class ESPN:
             raise NoSuchElementException(xpath)
 
 
+    def login(self) -> None:
+        self.__Driver.get(URL_LOGIN)
+        time.sleep(1)
+
+         # Change the context of the WebDriver to the iFrame containing the registration form.
+        elementIFrame: WebElement = self.get_element(ELEMENT_IFRAME, isInput=False)
+        self.__Driver.switch_to.frame(elementIFrame)
+
+        # Enter the registration form data for the new account.
+        self.get_element(ELEMENT_INPUT_TEXT_EMAIL).send_keys(self.Email)
+        self.get_element(ELEMENT_INPUT_TEXT_PASSWORD).send_keys(INPUT_PASSWORD)
+        time.sleep(1)
+
+        # Submit the registration form and wait for the page to change to give confirmation.
+        self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).click()
+        self.__DriverWait.until(EC.url_changes(URL_LOGIN))
+
+        auth_token = self.__Driver.get_cookie("espn_s2")
+        print(auth_token)
+
+
     def register(self) -> None:
         """
         Register/Sign-Up the email address with ESPN to create a new account.
         """
+        self.validate_email()
+
         self.__Driver.get(URL_LOGIN)
         time.sleep(1)
 
@@ -131,3 +161,14 @@ class ESPN:
         # Submit the registration form and wait for the page to change to give confirmation.
         self.get_element(ELEMENT_FORM, isInput=False).submit()
         self.__DriverWait.until(EC.url_changes(URL_LOGIN))
+
+
+    def validate_email(self) -> None:
+        response = requests.post(URL_VALIDATE_EMAIL, json = {"email": self.Email})
+        if response.status_code == 200:
+            return
+
+        if "ACCOUNT_FOUND" in response.text:
+            raise EmailTakenException
+
+        raise InvalidEmailException
