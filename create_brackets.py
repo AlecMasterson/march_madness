@@ -38,11 +38,11 @@ def create_bracket(brackets: List[str]) -> str:
 def to_string(root: Game) -> str:
     def to_string(node: Game, level: int) -> str:
         if node.depth == level:
-            return node.winner.bracket_id if node.winner is not None else -1
+            return str(node.winner.bracket_id).zfill(2) if node.winner is not None else -1
 
         return f"{to_string(node.left, level)}|{to_string(node.right, level)}"
 
-    return "|".join([to_string(root, 5-i) for i in range(5)])
+    return "|".join([to_string(root, 5-i) for i in range(6)])
 
 
 if __name__ == "__main__":

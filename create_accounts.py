@@ -72,7 +72,6 @@ if __name__ == "__main__":
         temp: List[str] = args.RANGE.split(":")
         emails = [INPUT_EMAIL.replace("####", str(email)) for email in range(int(temp[0]), int(temp[1]))]
 
-    print(emails)
     if len(emails) > 0:
         LOGGER.info(f"Attempting to Register {len(emails)} Email(s) with ESPN")
         main(emails)

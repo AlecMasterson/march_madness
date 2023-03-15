@@ -1,0 +1,2 @@
+class BracketSubmissionException(Exception):
+    pass

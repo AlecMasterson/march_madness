@@ -10,6 +10,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from typing import List, Union
+import re
 import requests
 import time
 
@@ -34,6 +35,7 @@ URL_VALIDATE_EMAIL = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.W
 class ESPN:
 
 
+    AuthToken: str
     Email: str
     __Driver: WebDriver
     __DriverWait: WebDriverWait
@@ -67,11 +69,17 @@ class ESPN:
         """
         driver_options: Options = Options()
         driver_options.add_argument("--disable-dev-shm-usage")
-        driver_options.add_argument("--headless")
+        # driver_options.add_argument("--headless")
         driver_options.add_argument('--log-level=3')
         driver_options.add_argument('--no-sandbox')
 
         return webdriver.Chrome(options=driver_options)
+
+
+    def get_brackets(self) -> List[str]:
+        response = requests.get("https://fantasy.espn.com/tournament-challenge-bracket/2023/en", headers={"cookie": f"espn_s2={self.AuthToken}"})
+        matches = re.findall(r'/href="entry\?entryID=\d+">/gm', response.text)
+        print(matches)
 
 
     def get_element(self, xpath: str, isInput: bool = True) -> Union[NoSuchElementException, WebElement]:
@@ -106,24 +114,27 @@ class ESPN:
 
 
     def login(self) -> None:
+        """
+        Login to ESPN with the email address to obtain the Auth-Token for API interacion.
+        """
         self.__Driver.get(URL_LOGIN)
         time.sleep(1)
 
-         # Change the context of the WebDriver to the iFrame containing the registration form.
+         # Change the context of the WebDriver to the iFrame containing the login form.
         elementIFrame: WebElement = self.get_element(ELEMENT_IFRAME, isInput=False)
         self.__Driver.switch_to.frame(elementIFrame)
 
-        # Enter the registration form data for the new account.
+        # Enter the login form data for the new account.
         self.get_element(ELEMENT_INPUT_TEXT_EMAIL).send_keys(self.Email)
         self.get_element(ELEMENT_INPUT_TEXT_PASSWORD).send_keys(INPUT_PASSWORD)
         time.sleep(1)
 
-        # Submit the registration form and wait for the page to change to give confirmation.
+        # Submit the login form and wait for the page to change to give confirmation.
         self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).click()
         self.__DriverWait.until(EC.url_changes(URL_LOGIN))
+        time.sleep(1)
 
-        auth_token = self.__Driver.get_cookie("espn_s2")
-        print(auth_token)
+        self.AuthToken = self.__Driver.get_cookie("espn_s2")["value"]
 
 
     def register(self) -> None:
@@ -161,6 +172,21 @@ class ESPN:
         # Submit the registration form and wait for the page to change to give confirmation.
         self.get_element(ELEMENT_FORM, isInput=False).submit()
         self.__DriverWait.until(EC.url_changes(URL_LOGIN))
+
+
+    def submit(self, bracket: str) -> None:
+        """
+        Submit a bracket to ESPN.
+
+        Parameters
+        ----------
+        bracket : str
+        """
+        response = requests.get(URL_SUBMIT, headers={"cookie": f"espn_s2={self.AuthToken}"}, params={"b": bracket, "r": "entry", "t1": 72, "t2": 65})
+        if response.status_code == 200:
+            return
+
+        raise BracketSubmissionException
 
 
     def validate_email(self) -> None:
