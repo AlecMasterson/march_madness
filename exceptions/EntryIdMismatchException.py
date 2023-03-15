@@ -1,0 +1,2 @@
+class EntryIdMismatchException(Exception):
+    pass

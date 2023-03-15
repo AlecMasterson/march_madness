@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 from concurrent.futures import as_completed, Future, ProcessPoolExecutor, wait
 from ESPN import ESPN
 from exceptions.EmailTakenException import EmailTakenException
+from exceptions.InvalidEmailException import InvalidEmailException
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from tqdm import tqdm
 from typing import List
@@ -25,7 +26,9 @@ def register(email: str) -> tuple:
 
         return (True, email, None)
     except EmailTakenException:
-        message = "EMAIL TAKEN"
+        return (True, email, "EMAIL TAKEN")
+    except InvalidEmailException:
+        message = "INVALID EMAIL"
     except NoSuchElementException:
         message = "NOSUCHELEMENT"
     except TimeoutException:
@@ -47,7 +50,17 @@ def main(emails: List[str]) -> None:
 
         wait(futures)
 
-    failures: List[tuple] = [result for result in [future.result() for future in futures] if not result[0]]
+    results: List[tuple] = [future.result() for future in futures]
+
+    existing = []
+    with open("./data/emails.txt", "r") as file:
+        existing = set(line.strip() for line in file)
+    for result in [result for result in results if result[0]]:
+        existing.add(result[1])
+    with open("./data/emails.txt", "w") as file:
+        file.writelines("\n".join(sorted(list(existing))))
+
+    failures: List[tuple] = [result for result in results if not result[0]]
     uniqueErrors = set(failure[-1] for failure in failures)
     result_dict = {error: [get_email_number(failure[1]) for failure in failures if failure[-1] == error] for error in uniqueErrors}
 
