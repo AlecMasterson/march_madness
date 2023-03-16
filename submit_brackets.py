@@ -31,6 +31,10 @@ def main(submissions: pandas.DataFrame, emails: List[str]) -> None:
 def submit(submissions: pandas.DataFrame, email: str) -> tuple:
     results = []
 
+    if submissions[submissions["email"] == email]["submitted"].all() and (submissions[submissions["email"] == email]["id"] != -1).all():
+        # LOGGER.info(f"{email}: All Submitted, Skipping")
+        return (True, email, results)
+
     with ESPN(email) as espn:
         try:
             espn.login()

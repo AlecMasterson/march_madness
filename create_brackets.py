@@ -69,4 +69,4 @@ if __name__ == "__main__":
 
             submissions = pandas.concat([submissions, newSubmission], ignore_index=True)
 
-    submissions.to_csv("./data/2023/submissions.csv", index=False)
+        submissions.to_csv("./data/2023/submissions.csv", index=False)

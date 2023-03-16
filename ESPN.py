@@ -138,7 +138,7 @@ class ESPN:
             # Wait to see if an additional code is required for login.
             # If not required, this will quietly throw a TimeoutException.
             self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_INPUT_TEXT_CODE)))
-            LOGGER.warning(f"{self.Email}: Code Required for Login")
+            # LOGGER.warning(f"{self.Email}: Code Required for Login")
 
             # Retrieve the code from GMail and enter the form data.
             self.get_element(ELEMENT_INPUT_TEXT_CODE).send_keys(get_code(self.Email))

@@ -38,7 +38,7 @@ def get_code(email: str) -> str:
         if code is not None:
             return code
 
-        LOGGER.warning(f"{email}: Code Not Found, Waiting...")
+        # LOGGER.warning(f"{email}: Code Not Found, Waiting...")
         time.sleep(2)
 
 
