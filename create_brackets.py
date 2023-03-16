@@ -60,6 +60,7 @@ if __name__ == "__main__":
             newSubmission = pandas.DataFrame([{
                 "bracket": create_bracket(submissions["bracket"]),
                 "email": email,
+                "id": -1,
                 "type": "WEIGHTED_SEED",
                 "submitted": False,
                 "validated": False,
