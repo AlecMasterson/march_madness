@@ -47,7 +47,7 @@ def to_string(root: Game) -> str:
 
 
 if __name__ == "__main__":
-    submissions: pandas.DataFrame = pandas.read_csv("./data/2023/submissions.csv", dtype={"score": float, "submitted": bool, "validated": bool})
+    submissions: pandas.DataFrame = pandas.read_csv("./data/2023/submissions.csv", dtype={"id": int, "score": float, "submitted": bool, "validated": bool})
 
     emails: List[str] = []
     with open("./data/emails.txt", "r") as file:

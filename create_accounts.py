@@ -58,7 +58,10 @@ def main(emails: List[str]) -> None:
     for result in [result for result in results if result[0]]:
         existing.add(result[1])
     with open("./data/emails.txt", "w") as file:
-        file.writelines("\n".join(sorted(list(existing))))
+        def get_n(i):
+            return int("".join(filter(str.isdigit, i)))
+        existing = sorted(list(existing), key=get_n)
+        file.writelines("\n".join(existing))
 
     failures: List[tuple] = [result for result in results if not result[0]]
     uniqueErrors = set(failure[-1] for failure in failures)
