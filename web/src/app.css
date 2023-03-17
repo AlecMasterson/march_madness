@@ -1,0 +1,14 @@
+body {
+    background-color: #201d39;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+#root {
+    display: flex;
+    height: 100vh;
+}
+
+.main-tabs {
+    margin-bottom: 2rem;
+}

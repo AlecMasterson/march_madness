@@ -27,14 +27,15 @@ def login():
             token.write(creds.to_json())
 
     return build("gmail", "v1", credentials=creds)
+GMAIL = login()
 
 
 def get_code(email: str) -> str:
-    gmail = login()
     retry = True
 
     while retry:
-        code = __get_code_from_email(gmail, email)
+        time.sleep(10)
+        code = __get_code_from_email(GMAIL, email)
         if code is not None:
             return code
 

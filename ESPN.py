@@ -160,6 +160,12 @@ class ESPN:
         self.AuthToken = self.__Driver.get_cookie("espn_s2")["value"]
 
 
+    def login_2(self) -> None:
+        session = requests.Session()
+        session.get(URL_LOGIN)
+
+
+
     def register(self) -> None:
         """
         Register/Sign-Up the email address with ESPN to create a new account.

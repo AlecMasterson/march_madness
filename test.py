@@ -1,6 +1,11 @@
 from typing import List
 import pandas
 
+df = pandas.read_csv("./data/2023/submissions.csv")
+print(len(df[df["submitted"] == True]))
+print(len(df[df["id"] != -1]))
+1/0
+
 df = pandas.DataFrame([{"A": -1}, {"A": -1}])
 print((df["A"] == -1).all())
 1/0
