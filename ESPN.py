@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from exceptions.BracketSubmissionException import BracketSubmissionException
 from exceptions.EmailTakenException import EmailTakenException
 from exceptions.EntryIdMismatchException import EntryIdMismatchException
@@ -13,9 +14,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from typing import List, Optional
 from utils import LOGGER
+import json
+import os
 import re
 import requests
 import time
+
+load_dotenv(dotenv_path="./.env")
 
 
 ELEMENT_IFRAME = "//iframe[@name='oneid-iframe']"
@@ -27,15 +32,11 @@ ELEMENT_INPUT_TEXT_NAME_FIRST = "//input[@id='InputFirstName']"
 ELEMENT_INPUT_TEXT_NAME_LAST = "//input[@id='InputLastName']"
 ELEMENT_INPUT_TEXT_PASSWORD = "//input[@type='password']"
 
-INPUT_NAME_FIRST = "Alec"
-INPUT_NAME_LAST = "Masterson"
-
 PARAMS_BRACKET_CREATE = {"r": "entry", "t1": 72, "t2": 65}
 
 URL_ENDPOINT_BRACKET_CREATE = "/createOrUpdateEntry"
 URL_ENDPOINT_BRACKET_ENTRY = "/entry\?entryID=(\d+)"
 
-URL_LOGIN = "https://www.espn.com/login"
 URL_TOURNAMENT_CHALLENGE = "https://fantasy.espn.com/tournament-challenge-bracket/2023/en"
 URL_VALIDATE_EMAIL = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD/validate"
 
@@ -47,8 +48,54 @@ class ESPN:
     __Driver: WebDriver
     __DriverWait: WebDriverWait
 
+    __CONFIG = {}
+
+    __ENDPOINT_EMAIL_AVAILABILITY = "/validate"
+    __ENDPOINT_REGISTER = "/guest/register"
+
+    __HEADERS = {
+        "Content-Type": "application/json"
+    }
+
+    __PARAMS_REGISTER = {
+        "autogeneratePassword": False,
+        "autogenerateUsername": False,
+        "feature": "no-password-reuse",
+        "langPref": "en-US"
+    }
+
+    __PAYLOAD_REGISTER = {
+        # "displayName": {"proposedDisplayName": username}
+        "legalAssertions": ["gtou_ppv2_proxy"],
+        # "password": password,
+        "profile": {
+            # "email": email
+            # "firstName": firstName,
+            # "lastName": lastName,
+            "region": "US"
+            # "username": username
+        }
+    }
+
+    __URL = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD"
+
 
     def __init__(self, email: str):
+        try:
+            self.__CONFIG = {
+                "EMAIL": os.environ["EMAIL"],
+                "NAME_FIRST": os.environ["NAME_FIRST"],
+                "NAME_LAST": os.environ["NAME_LAST"],
+                "PASSWORD": os.environ["PASSWORD"],
+                "USERNAME": os.environ["USER_NAME"]
+            }
+
+            self.__PAYLOAD_REGISTER["password"] = self.__CONFIG["PASSWORD"]
+            self.__PAYLOAD_REGISTER["profile"]["firstName"] = self.__CONFIG["NAME_FIRST"]
+            self.__PAYLOAD_REGISTER["profile"]["lastName"] = self.__CONFIG["NAME_LAST"]
+        except:
+            raise Exception("Environment Variables Missing, Please Check Requirements in README")
+
         self.Email = email
 
 
@@ -82,6 +129,20 @@ class ESPN:
         driver_options.add_argument('--no-sandbox')
 
         return webdriver.Chrome(options=driver_options)
+
+
+    def check_availability(self) -> None:
+        payload: dict = {"email": self.Email}
+        url: str = self.__URL + self.__ENDPOINT_EMAIL_AVAILABILITY
+
+        response: requests.Response = requests.post(url, json=payload)
+        if response.ok and response.status_code == 200:
+            return
+
+        if "ACCOUNT_FOUND" in response.text:
+            raise EmailTakenException
+
+        raise Exception(f"{self.Email}: Failed to Check Email Availability, {response.text}")
 
 
     def get_element(self, xpath: str, isInput: bool = True) -> WebElement:
@@ -119,7 +180,7 @@ class ESPN:
         """
         Login to ESPN with the email address to obtain the AuthToken for API interacion.
         """
-        self.__Driver.get(URL_LOGIN)
+        self.__Driver.get(__URL_LOGIN)
         time.sleep(1)
 
          # Change the context of the WebDriver to the iFrame containing the login form.
@@ -153,48 +214,26 @@ class ESPN:
             pass
 
         # Wait for the page to change to give confirmation.
-        self.__DriverWait.until(EC.url_changes(URL_LOGIN))
+        self.__DriverWait.until(EC.url_changes(__URL_LOGIN))
         time.sleep(1)
 
         # Update the AuthToken for this ESPN account to allow API interactions.
         self.AuthToken = self.__Driver.get_cookie("espn_s2")["value"]
 
 
-    def login_2(self) -> None:
-        session = requests.Session()
-        session.get(URL_LOGIN)
-
-
-
     def register(self) -> None:
-        """
-        Register/Sign-Up the email address with ESPN to create a new account.
-        """
-        self.validate_email()
+        self.check_availability()
 
-        self.__Driver.get(URL_LOGIN)
-        time.sleep(1)
+        payload: dict = self.__PAYLOAD_REGISTER.copy()
+        payload["displayName"] = {"proposedDisplayName": self.__CONFIG["USERNAME"] + id}
+        payload["profile"]["email"] = self.Email
+        payload["profile"]["username"] = self.__CONFIG["USERNAME"] + id
 
-        # Change the context of the WebDriver to the iFrame containing the registration form.
-        elementIFrame: WebElement = self.get_element(ELEMENT_IFRAME, isInput=False)
-        self.__Driver.switch_to.frame(elementIFrame)
+        url: str = self.__URL + self.__ENDPOINT_REGISTER
 
-        # Choose the "Sign Up" option, instead of logging in with an existing email address.
-        self.get_element(ELEMENT_INPUT_BUTTON_SIGNUP).click()
-        self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_INPUT_TEXT_NAME_FIRST)))
-        time.sleep(1)
-
-        # Enter the registration form data for the new account.
-        self.get_element(ELEMENT_INPUT_TEXT_EMAIL).send_keys(self.Email)
-        self.get_element(ELEMENT_INPUT_TEXT_NAME_FIRST).send_keys(INPUT_NAME_FIRST)
-        self.get_element(ELEMENT_INPUT_TEXT_NAME_LAST).send_keys(INPUT_NAME_LAST)
-        self.get_element(ELEMENT_INPUT_TEXT_PASSWORD).send_keys(INPUT_PASSWORD)
-        time.sleep(1)
-
-        # Submit the registration form and wait for the page to change to give confirmation.
-        self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).submit()
-        self.__DriverWait.until(EC.url_changes(URL_LOGIN))
-        time.sleep(1)
+        response: requests.Response = requests.post(url, json=payload, headers=self.__HEADERS, params=self.__PARAMS_REGISTER)
+        if not response.ok or response.status_code != 200:
+            raise Exception(f"{self.Email}: Failed to Register, {response.text}")
 
 
     def submit(self, bracket: str, entryId: Optional[int]) -> int:
@@ -240,14 +279,3 @@ class ESPN:
             raise BracketSubmissionException("Failed to Find EntryId")
         except Exception:
             raise BracketSubmissionException("Unknown Exception")
-
-
-    def validate_email(self) -> None:
-        response = requests.post(URL_VALIDATE_EMAIL, json = {"email": self.Email})
-        if response.status_code == 200:
-            return
-
-        if "ACCOUNT_FOUND" in response.text:
-            raise EmailTakenException
-
-        raise InvalidEmailException
