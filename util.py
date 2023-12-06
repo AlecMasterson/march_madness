@@ -3,7 +3,7 @@ from models.Game import Game
 from models.Team import Team
 from typing import List, Optional
 import pandas
-import random
+import secrets
 
 
 REGIONS = ["WEST", "EAST", "SOUTH", "MIDWEST"]
@@ -82,7 +82,7 @@ def bracket_solve(root: Game) -> str:
             team1 = game.team1 if game.team1 is not None else game.left.winner
             team2 = game.team2 if game.team2 is not None else game.right.winner
 
-            game.winner = random.choices([team1, team2], weights=[team2.bracket_seed, team1.bracket_seed], k=1)[0]
+            game.winner = secrets.SystemRandom().choices([team1, team2], weights=[team2.bracket_seed, team1.bracket_seed], k=1)[0]
 
             return str(game.winner.bracket_id)
 
