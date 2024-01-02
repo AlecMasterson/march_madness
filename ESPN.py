@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 from exceptions.BracketSubmissionException import BracketSubmissionException
 from exceptions.EmailTakenException import EmailTakenException
 from exceptions.EntryIdMismatchException import EntryIdMismatchException
-from exceptions.InvalidEmailException import InvalidEmailException
 from GMail import get_code
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
@@ -14,11 +13,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from typing import List, Optional
 from utils import LOGGER
-import json
 import os
 import re
 import requests
 import time
+from security import safe_requests
 
 load_dotenv(dotenv_path="./.env")
 
@@ -264,7 +263,7 @@ class ESPN:
         url: str = URL_TOURNAMENT_CHALLENGE + URL_ENDPOINT_BRACKET_CREATE
 
         try:
-            response: requests.Response = requests.get(url, headers=headers, params=params)
+            response: requests.Response = safe_requests.get(url, headers=headers, params=params)
             if response.status_code != 200:
                 raise BracketSubmissionException(f"Status Code = {response.status_code}")
 
