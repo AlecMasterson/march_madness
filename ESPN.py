@@ -135,7 +135,7 @@ class ESPN:
         payload: dict = {"email": self.Email}
         url: str = self.__URL + self.__ENDPOINT_EMAIL_AVAILABILITY
 
-        response: requests.Response = requests.post(url, json=payload)
+        response: requests.Response = requests.post(url, json=payload, timeout=60)
         if response.ok and response.status_code == 200:
             return
 
@@ -231,7 +231,7 @@ class ESPN:
 
         url: str = self.__URL + self.__ENDPOINT_REGISTER
 
-        response: requests.Response = requests.post(url, json=payload, headers=self.__HEADERS, params=self.__PARAMS_REGISTER)
+        response: requests.Response = requests.post(url, json=payload, headers=self.__HEADERS, params=self.__PARAMS_REGISTER, timeout=60)
         if not response.ok or response.status_code != 200:
             raise Exception(f"{self.Email}: Failed to Register, {response.text}")
 
@@ -264,7 +264,7 @@ class ESPN:
         url: str = URL_TOURNAMENT_CHALLENGE + URL_ENDPOINT_BRACKET_CREATE
 
         try:
-            response: requests.Response = requests.get(url, headers=headers, params=params)
+            response: requests.Response = requests.get(url, headers=headers, params=params, timeout=60)
             if response.status_code != 200:
                 raise BracketSubmissionException(f"Status Code = {response.status_code}")
 
