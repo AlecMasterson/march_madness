@@ -16,12 +16,12 @@ TEAMS = pandas.read_csv("data/2022/team_data.csv")
 def get_score(submission: List[int]) -> int:
     score = 0
 
-    score += sum([10 for index, winner in enumerate(SOLUTION_WINNERS[:32]) if int(submission[index]) == int(winner)])
-    score += sum([20 for index, winner in enumerate(SOLUTION_WINNERS[32:48]) if int(submission[index+32]) == int(winner)])
-    score += sum([40 for index, winner in enumerate(SOLUTION_WINNERS[48:56]) if int(submission[index+48]) == int(winner)])
-    score += sum([80 for index, winner in enumerate(SOLUTION_WINNERS[56:60]) if int(submission[index+56]) == int(winner)])
-    score += sum([160 for index, winner in enumerate(SOLUTION_WINNERS[60:62]) if int(submission[index+60]) == int(winner)])
-    score += sum([320 for index, winner in enumerate(SOLUTION_WINNERS[62:63]) if int(submission[index+62]) == int(winner)])
+    score += sum(10 for index, winner in enumerate(SOLUTION_WINNERS[:32]) if int(submission[index]) == int(winner))
+    score += sum(20 for index, winner in enumerate(SOLUTION_WINNERS[32:48]) if int(submission[index+32]) == int(winner))
+    score += sum(40 for index, winner in enumerate(SOLUTION_WINNERS[48:56]) if int(submission[index+48]) == int(winner))
+    score += sum(80 for index, winner in enumerate(SOLUTION_WINNERS[56:60]) if int(submission[index+56]) == int(winner))
+    score += sum(160 for index, winner in enumerate(SOLUTION_WINNERS[60:62]) if int(submission[index+60]) == int(winner))
+    score += sum(320 for index, winner in enumerate(SOLUTION_WINNERS[62:63]) if int(submission[index+62]) == int(winner))
 
     return score
 
@@ -152,4 +152,4 @@ def submission_to_json(submission: List[str]) -> List[dict]:
         {"matchups": get_matchups(root, 0), "name": "Championship"}
     ]
 
-    return [{**i, "points": sum([j["points"] for j in i["matchups"]])} for i in response]
+    return [{**i, "points": sum(j["points"] for j in i["matchups"])} for i in response]
