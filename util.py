@@ -94,7 +94,8 @@ def bracket_solve(root: Game) -> str:
 def submission_to_json(submission: List[str]) -> List[dict]:
     root = bracket_build()
 
-    def get_matchups(game: Game, level: int, matchups=[]) -> List[dict]:
+    def get_matchups(game: Game, level: int, matchups=None) -> List[dict]:
+        matchups = [] if matchups is None else matchups
         if game.depth == level:
             team1C: Team = {"bracket_seed": "TBD", "team_name": "TBD"}
             team1Score: int = 0
