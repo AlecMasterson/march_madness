@@ -15,6 +15,7 @@ for matchup in data:
 
     for team in matchup["possibleOutcomes"]:
         teams.append({
+            "bracket_id": ((team["regionId"] - 1) * 16) + team["regionSeed"],
             "id": team["id"],
             "rank": int([x for x in team["mappings"] if x["type"] == "RANKING"][0]["value"]),
             "record": team["additionalInfo"],
@@ -24,5 +25,5 @@ for matchup in data:
             "team_name": team["name"]
         })
 
-df = pandas.DataFrame(data=teams)
+df = pandas.DataFrame(data=teams).sort_values(by="bracket_id")
 df.to_csv(f"./data/{YEAR}/teams.csv", index=False)
