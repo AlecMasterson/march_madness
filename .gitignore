@@ -3,3 +3,4 @@ logs/
 gmail_*.json
 .env
 node_modules
+.idea/

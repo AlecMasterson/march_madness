@@ -18,17 +18,14 @@ with open(f"./data/{__YEAR}/matchups.json", "w") as file:
 
 teams: List[dict] = []
 for matchup in data:
-    if matchup["scoringPeriodId"] != 1:
+    if int(matchup["scoringPeriodId"]) != 1:
         continue
 
     for team in sorted(matchup["possibleOutcomes"], key=lambda x: x["regionSeed"]):
         teams.append({
-            "bracket_id": ((team["regionId"] - 1) * 16) + __SEED_ORDER.index(team["regionSeed"]) + 1,
+            "bracket_id": ((int(team["regionId"]) - 1) * 16) + __SEED_ORDER.index(int(team["regionSeed"])) + 1,
             "rank": int([x for x in team["mappings"] if x["type"] == "RANKING"][0]["value"]),
-            "record": team["additionalInfo"],
-            "region": team["regionId"],
             "seed": team["regionSeed"],
-            "team_abbrev": team["abbrev"],
             "team_name": team["name"]
         })
 

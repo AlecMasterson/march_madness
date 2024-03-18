@@ -1,65 +1,65 @@
-bracket_id,rank,record,region,seed,team_abbrev,team_name
-1,1,31-3,1,1,CONN,UConn
-2,64,22-12,1,16,STET,Stetson
-3,32,25-8,1,8,FAU,FAU
-4,33,21-11,1,9,NU,Northwestern
-5,17,24-10,1,5,SDSU,San Diego St
-6,48,23-11,1,12,UAB,UAB
-7,16,27-7,1,4,AUB,Auburn
-8,49,22-9,1,13,YALE,Yale
-9,24,23-10,1,6,BYU,BYU
-10,41,24-11,1,11,DUQ,Duquesne
-11,9,26-8,1,3,ILL,Illinois
-12,56,26-8,1,14,MORE,Morehead St
-13,25,24-9,1,7,WSU,Washington St
-14,40,28-6,1,10,DRKE,Drake
-15,8,27-7,1,2,ISU,Iowa State
-16,57,22-12,1,15,SDST,S Dakota St
-17,4,27-7,2,1,UNC,North Carolina
-18,61,,2,16,HOW/WAG,HOW/WAG
-19,29,21-13,2,8,MSST,Mississippi St
-20,36,19-14,2,9,MSU,Michigan St
-21,20,26-7,2,5,SMC,Saint Mary's
-22,45,29-4,2,12,GCU,Grand Canyon
-23,13,21-11,2,4,ALA,Alabama
-24,52,27-7,2,13,COFC,Charleston
-25,21,21-11,2,6,CLEM,Clemson
-26,44,26-9,2,11,UNM,New Mexico
-27,12,23-10,2,3,BAY,Baylor
-28,53,25-9,2,14,COLG,Colgate
-29,28,24-7,2,7,DAY,Dayton
-30,37,26-7,2,10,NEV,Nevada
-31,5,25-8,2,2,ARIZ,Arizona
-32,60,21-14,2,15,LBSU,Long Beach St
-33,2,30-4,3,1,HOU,Houston
-34,63,21-13,3,16,LONG,Longwood
-35,31,23-10,3,8,NEB,Nebraska
-36,34,20-14,3,9,TA&M,Texas A&M
-37,18,22-13,3,5,WIS,Wisconsin
-38,47,31-3,3,12,JMU,James Madison
-39,15,24-8,3,4,DUKE,Duke
-40,50,28-6,3,13,UVM,Vermont
-41,23,23-10,3,6,TTU,Texas Tech
-42,42,22-14,3,11,NCSU,NC State
-43,10,23-9,3,3,UK,Kentucky
-44,55,23-11,3,14,OAK,Oakland
-45,26,24-11,3,7,FLA,Florida
-46,39,,3,10,BOIS/COL,BOIS/COL
-47,7,25-9,3,2,MARQ,Marquette
-48,58,22-11,3,15,WKU,Western KY
-49,3,29-4,4,1,PUR,Purdue
-50,62,,4,16,MTST/GRAM,MTST/GRAM
-51,30,27-6,4,8,USU,Utah State
-52,35,21-12,4,9,TCU,TCU
-53,19,25-7,4,5,GONZ,Gonzaga
-54,46,30-3,4,12,MCN,McNeese
-55,14,22-10,4,4,KU,Kansas
-56,51,29-5,4,13,SAM,Samford
-57,22,26-7,4,6,SC,South Carolina
-58,43,23-11,4,11,ORE,Oregon
-59,11,23-9,4,3,CREI,Creighton
-60,54,24-10,4,14,AKR,Akron
-61,27,20-12,4,7,TEX,Texas
-62,38,,4,10,UVA/CSU,UVA/CSU
-63,6,24-8,4,2,TENN,Tennessee
-64,59,19-13,4,15,SPU,Saint Peter's
+bracket_id,rank,seed,team_name
+1,1,1,UConn
+2,64,16,Stetson
+3,32,8,FAU
+4,33,9,Northwestern
+5,17,5,San Diego St
+6,48,12,UAB
+7,16,4,Auburn
+8,49,13,Yale
+9,24,6,BYU
+10,41,11,Duquesne
+11,9,3,Illinois
+12,56,14,Morehead St
+13,25,7,Washington St
+14,40,10,Drake
+15,8,2,Iowa State
+16,57,15,S Dakota St
+17,4,1,North Carolina
+18,61,16,HOW/WAG
+19,29,8,Mississippi St
+20,36,9,Michigan St
+21,20,5,Saint Mary's
+22,45,12,Grand Canyon
+23,13,4,Alabama
+24,52,13,Charleston
+25,21,6,Clemson
+26,44,11,New Mexico
+27,12,3,Baylor
+28,53,14,Colgate
+29,28,7,Dayton
+30,37,10,Nevada
+31,5,2,Arizona
+32,60,15,Long Beach St
+33,2,1,Houston
+34,63,16,Longwood
+35,31,8,Nebraska
+36,34,9,Texas A&M
+37,18,5,Wisconsin
+38,47,12,James Madison
+39,15,4,Duke
+40,50,13,Vermont
+41,23,6,Texas Tech
+42,42,11,NC State
+43,10,3,Kentucky
+44,55,14,Oakland
+45,26,7,Florida
+46,39,10,BOIS/COL
+47,7,2,Marquette
+48,58,15,Western KY
+49,3,1,Purdue
+50,62,16,MTST/GRAM
+51,30,8,Utah State
+52,35,9,TCU
+53,19,5,Gonzaga
+54,46,12,McNeese
+55,14,4,Kansas
+56,51,13,Samford
+57,22,6,South Carolina
+58,43,11,Oregon
+59,11,3,Creighton
+60,54,14,Akron
+61,27,7,Texas
+62,38,10,UVA/CSU
+63,6,2,Tennessee
+64,59,15,Saint Peter's

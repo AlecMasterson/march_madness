@@ -2,10 +2,9 @@ from dataclasses import dataclass
 
 @dataclass
 class Submission:
+    bracket: str
     email: str
     id: str
-    bracket: str
-    type: str
+    score: float
     submitted: bool
     validated: bool
-    score: float

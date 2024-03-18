@@ -17,7 +17,7 @@ class Game:
         self.depth = depth
 
     def __repr__(self) -> str:
-        team1Str = self.team1.team_name if self.team1 is not None else ""
-        team2Str = self.team2.team_name if self.team2 is not None else ""
+        team1Str: str = self.team1.team_name if self.team1 is not None else "UNKNOWN"
+        team2Str: str = self.team2.team_name if self.team2 is not None else "UNKNOWN"
 
         return f"{team1Str} vs. {team2Str}"
