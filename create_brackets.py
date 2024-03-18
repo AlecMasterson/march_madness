@@ -1,12 +1,11 @@
 from models.Game import Game
 from models.Team import Team
-from typing import List
 import random
 import pandas
 import tqdm
 
-
-__TEAMS: pandas.DataFrame = pandas.read_csv("./data/2023/teams.csv")
+__SUBMISSIONS: pandas.DataFrame = pandas.read_csv("./data/2024/submissions.csv")
+__TEAMS: pandas.DataFrame = pandas.read_csv("./data/2024/teams.csv")
 
 
 def build_bracket(teams: pandas.DataFrame, node: Game = Game()) -> Game:
@@ -22,51 +21,40 @@ def build_bracket(teams: pandas.DataFrame, node: Game = Game()) -> Game:
         node.right = build_bracket(teams, Game(depth=node.depth+1))
         node.team2 = node.right.winner
 
-    node.winner = random.choices([node.team1, node.team2], k=1, weights=[node.team2.bracket_seed, node.team1.bracket_seed])[0]
+    node.winner = random.choices([node.team1, node.team2], k=1, weights=[node.team2.seed, node.team1.seed])[0]
 
     return node
 
 
-def create_bracket(brackets: List[str]) -> str:
-    bracket: str = None
-
-    while bracket is None or bracket in brackets:
-        bracket = to_string(build_bracket(__TEAMS.copy()))
-
-    return bracket
-
-
-def to_string(root: Game) -> str:
-    def to_string(node: Game, level: int) -> str:
-        if node.depth == level:
-            return str(node.winner.bracket_id).zfill(2) if node.winner is not None else -1
-
-        return f"{to_string(node.left, level)}|{to_string(node.right, level)}"
-
-    return "|".join([to_string(root, 5-i) for i in range(6)])
-
-
 if __name__ == "__main__":
-    submissions: pandas.DataFrame = pandas.read_csv("./data/2023/submissions.csv", dtype={"id": int, "score": float, "submitted": bool, "validated": bool})
+    submissions: pandas.DataFrame = __SUBMISSIONS.copy()
+    submissions["submitted"] = submissions["submitted"].astype(bool)
+    submissions["validated"] = submissions["validated"].astype(bool)
 
-    emails: List[str] = []
-    with open("./data/emails.txt", "r") as file:
-        emails = list(set(line.strip() for line in file))
+    for i in tqdm.tqdm(range(1)):
+        toMake: int = 25 - len(submissions[submissions["email"] == i+1])
 
-    for email in tqdm.tqdm(emails):
-        count: int = len(submissions[submissions["email"] == email])
+        if toMake == 0:
+            continue
+        elif toMake < 0:
+            raise Exception(f"Email '{i}' Has Too Many Brackets")
 
-        for _ in range(25 - count):
-            newSubmission = pandas.DataFrame([{
-                "bracket": create_bracket(submissions["bracket"]),
-                "email": email,
-                "id": -1,
-                "type": "WEIGHTED_SEED",
+        for _ in range(toMake):
+            bracket: str = ""
+            while bracket == "" or bracket in submissions["bracket"]:
+                bracket = str(build_bracket(__TEAMS.copy()))
+
+            newSubmission: pandas.DataFrame = pandas.DataFrame([{
+                "bracket": bracket,
+                "email": i+1,
+                "id": "",
+                "score": 0.0,
                 "submitted": False,
-                "validated": False,
-                "score": 0.0
+                "validated": False
             }])
+            newSubmission["submitted"] = newSubmission["submitted"].astype(bool)
+            newSubmission["validated"] = newSubmission["validated"].astype(bool)
 
-            submissions = pandas.concat([submissions, newSubmission], ignore_index=True)
+            submissions: pandas.DataFrame = pandas.concat([submissions, newSubmission], ignore_index=True)
 
-        submissions.to_csv("./data/2023/submissions.csv", index=False)
+        submissions.to_csv("./data/2024/submissions.csv", index=False)

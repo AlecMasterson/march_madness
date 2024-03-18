@@ -21,3 +21,12 @@ class Game:
         team2Str: str = self.team2.team_name if self.team2 is not None else "UNKNOWN"
 
         return f"{team1Str} vs. {team2Str}"
+
+    def __str__(self) -> str:
+        def to_string(node: Game, level: int) -> str:
+            if node.depth == level:
+                return str(node.winner.bracket_id).zfill(2) if node.winner is not None else ""
+
+            return f"{to_string(node.left, level)}|{to_string(node.right, level)}"
+
+        return "|".join([to_string(self, 5-i) for i in range(6-self.depth)])
