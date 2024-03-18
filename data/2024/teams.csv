@@ -1,0 +1,65 @@
+id,rank,record,region,seed,team_abbrev,team_name
+a4784aa1-c12d-11ee-b568-d9cd047f74cf,1,31-3,1,1,CONN,UConn
+a4784aa2-c12d-11ee-b568-d9cd047f74cf,64,22-12,1,16,STET,Stetson
+a483bc51-c12d-11ee-b568-d9cd047f74cf,3,29-4,4,1,PUR,Purdue
+a483bc52-c12d-11ee-b568-d9cd047f74cf,62,,4,16,MTST/GRAM,MTST/GRAM
+a4814b51-c12d-11ee-b568-d9cd047f74cf,15,24-8,3,4,DUKE,Duke
+a4814b52-c12d-11ee-b568-d9cd047f74cf,50,28-6,3,13,UVM,Vermont
+a48012d1-c12d-11ee-b568-d9cd047f74cf,2,30-4,3,1,HOU,Houston
+a48012d2-c12d-11ee-b568-d9cd047f74cf,63,21-13,3,16,LONG,Longwood
+a48765d1-c12d-11ee-b568-d9cd047f74cf,6,24-8,4,2,TENN,Tennessee
+a48765d2-c12d-11ee-b568-d9cd047f74cf,59,19-13,4,15,SPU,Saint Peter's
+a479aa31-c12d-11ee-b568-d9cd047f74cf,32,25-8,1,8,FAU,FAU
+a479aa32-c12d-11ee-b568-d9cd047f74cf,33,21-11,1,9,NU,Northwestern
+a47fc4b1-c12d-11ee-b568-d9cd047f74cf,5,25-8,2,2,ARIZ,Arizona
+a47fc4b2-c12d-11ee-b568-d9cd047f74cf,60,21-14,2,15,LBSU,Long Beach St
+a47e8c31-c12d-11ee-b568-d9cd047f74cf,21,21-11,2,6,CLEM,Clemson
+a47e8c32-c12d-11ee-b568-d9cd047f74cf,44,26-9,2,11,UNM,New Mexico
+a47d53b1-c12d-11ee-b568-d9cd047f74cf,29,21-13,2,8,MSST,Mississippi St
+a47d53b2-c12d-11ee-b568-d9cd047f74cf,36,19-14,2,9,MSU,Michigan St
+a47c1b31-c12d-11ee-b568-d9cd047f74cf,25,24-9,1,7,WSU,Washington St
+a47c1b32-c12d-11ee-b568-d9cd047f74cf,40,28-6,1,10,DRKE,Drake
+a4825cc1-c12d-11ee-b568-d9cd047f74cf,10,23-9,3,3,UK,Kentucky
+a4825cc2-c12d-11ee-b568-d9cd047f74cf,55,23-11,3,14,OAK,Oakland
+a4860641-c12d-11ee-b568-d9cd047f74cf,22,26-7,4,6,SC,South Carolina
+a4860642-c12d-11ee-b568-d9cd047f74cf,43,23-11,4,11,ORE,Oregon
+a484cdc1-c12d-11ee-b568-d9cd047f74cf,19,25-7,4,5,GONZ,Gonzaga
+a484cdc2-c12d-11ee-b568-d9cd047f74cf,46,30-3,4,12,MCN,McNeese
+a47ba601-c12d-11ee-b568-d9cd047f74cf,9,26-8,1,3,ILL,Illinois
+a47ba602-c12d-11ee-b568-d9cd047f74cf,56,26-8,1,14,MORE,Morehead St
+a482d1f1-c12d-11ee-b568-d9cd047f74cf,26,24-11,3,7,FLA,Florida
+a482d1f2-c12d-11ee-b568-d9cd047f74cf,39,,3,10,BOIS/COL,BOIS/COL
+a4819971-c12d-11ee-b568-d9cd047f74cf,23,23-10,3,6,TTU,Texas Tech
+a4819972-c12d-11ee-b568-d9cd047f74cf,42,22-14,3,11,NCSU,NC State
+a4867b71-c12d-11ee-b568-d9cd047f74cf,11,23-9,4,3,CREI,Creighton
+a4867b72-c12d-11ee-b568-d9cd047f74cf,54,24-10,4,14,AKR,Akron
+a47a9491-c12d-11ee-b568-d9cd047f74cf,16,27-7,1,4,AUB,Auburn
+a47a9492-c12d-11ee-b568-d9cd047f74cf,49,22-9,1,13,YALE,Yale
+a47f7691-c12d-11ee-b568-d9cd047f74cf,28,24-7,2,7,DAY,Dayton
+a47f7692-c12d-11ee-b568-d9cd047f74cf,37,26-7,2,10,NEV,Nevada
+a47e3e11-c12d-11ee-b568-d9cd047f74cf,13,21-11,2,4,ALA,Alabama
+a47e3e12-c12d-11ee-b568-d9cd047f74cf,52,27-7,2,13,COFC,Charleston
+a47a1f61-c12d-11ee-b568-d9cd047f74cf,17,24-10,1,5,SDSU,San Diego St
+a47a1f62-c12d-11ee-b568-d9cd047f74cf,48,23-11,1,12,UAB,UAB
+a47f0161-c12d-11ee-b568-d9cd047f74cf,12,23-10,2,3,BAY,Baylor
+a47f0162-c12d-11ee-b568-d9cd047f74cf,53,25-9,2,14,COLG,Colgate
+a4832011-c12d-11ee-b568-d9cd047f74cf,7,25-9,3,2,MARQ,Marquette
+a4832012-c12d-11ee-b568-d9cd047f74cf,58,22-11,3,15,WKU,Western KY
+a480af11-c12d-11ee-b568-d9cd047f74cf,31,23-10,3,8,NEB,Nebraska
+a480af12-c12d-11ee-b568-d9cd047f74cf,34,20-14,3,9,TA&M,Texas A&M
+a486c991-c12d-11ee-b568-d9cd047f74cf,27,20-12,4,7,TEX,Texas
+a486c992-c12d-11ee-b568-d9cd047f74cf,38,,4,10,UVA/CSU,UVA/CSU
+a4845891-c12d-11ee-b568-d9cd047f74cf,30,27-6,4,8,USU,Utah State
+a4845892-c12d-11ee-b568-d9cd047f74cf,35,21-12,4,9,TCU,TCU
+a47cb771-c12d-11ee-b568-d9cd047f74cf,4,27-7,2,1,UNC,North Carolina
+a47cb772-c12d-11ee-b568-d9cd047f74cf,61,,2,16,HOW/WAG,HOW/WAG
+a4856a01-c12d-11ee-b568-d9cd047f74cf,14,22-10,4,4,KU,Kansas
+a4856a02-c12d-11ee-b568-d9cd047f74cf,51,29-5,4,13,SAM,Samford
+a47b09c1-c12d-11ee-b568-d9cd047f74cf,24,23-10,1,6,BYU,BYU
+a47b09c2-c12d-11ee-b568-d9cd047f74cf,41,24-11,1,11,DUQ,Duquesne
+a480fd31-c12d-11ee-b568-d9cd047f74cf,18,22-13,3,5,WIS,Wisconsin
+a480fd32-c12d-11ee-b568-d9cd047f74cf,47,31-3,3,12,JMU,James Madison
+a47da1d1-c12d-11ee-b568-d9cd047f74cf,20,26-7,2,5,SMC,Saint Mary's
+a47da1d2-c12d-11ee-b568-d9cd047f74cf,45,29-4,2,12,GCU,Grand Canyon
+a47c6951-c12d-11ee-b568-d9cd047f74cf,8,27-7,1,2,ISU,Iowa State
+a47c6952-c12d-11ee-b568-d9cd047f74cf,57,22-12,1,15,SDST,S Dakota St
