@@ -31,7 +31,7 @@ if __name__ == "__main__":
     submissions["submitted"] = submissions["submitted"].astype(bool)
     submissions["validated"] = submissions["validated"].astype(bool)
 
-    for i in tqdm.tqdm(range(1)):
+    for i in tqdm.tqdm(range(4000)):
         toMake: int = 25 - len(submissions[submissions["email"] == i+1])
 
         if toMake == 0:
