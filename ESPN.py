@@ -178,9 +178,9 @@ class ESPN:
 
     def login(self) -> None:
         """
-        Login to ESPN with the email address to obtain the AuthToken for API interacion.
+        Login to ESPN to obtain the AuthToken for API interacion.
         """
-        self.__Driver.get(__URL_LOGIN)
+        self.__Driver.get(self.__URL_LOGIN)
         time.sleep(1)
 
          # Change the context of the WebDriver to the iFrame containing the login form.
@@ -189,7 +189,7 @@ class ESPN:
 
         # Enter the login form data for the account.
         self.get_element(ELEMENT_INPUT_TEXT_EMAIL).send_keys(self.Email)
-        self.get_element(ELEMENT_INPUT_TEXT_PASSWORD).send_keys(INPUT_PASSWORD)
+        self.get_element(ELEMENT_INPUT_TEXT_PASSWORD).send_keys(self.__CONFIG["PASSWORD"])
         time.sleep(1)
 
         # Submit the login form.
@@ -199,13 +199,13 @@ class ESPN:
             # Wait to see if an additional code is required for login.
             # If not required, this will quietly throw a TimeoutException.
             self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_INPUT_TEXT_CODE)))
-            # LOGGER.warning(f"{self.Email}: Code Required for Login")
+            LOGGER.warning(f"{self.Email}: Code Required for Login")
 
             # Retrieve the code from GMail and enter the form data.
-            self.get_element(ELEMENT_INPUT_TEXT_CODE).send_keys(get_code(self.Email))
+            self.get_element(ELEMENT_INPUT_TEXT_CODE).send_keys(get_two_factor_code(self.Email))
             time.sleep(1)
 
-            # Submit the code form.
+            # Submit the login form.
             self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).click()
         except TimeoutException:
             pass
@@ -213,12 +213,21 @@ class ESPN:
             LOGGER.error(f"{self.Email}: Failed to Provide Code, {e}")
             pass
 
-        # Wait for the page to change to give confirmation.
-        self.__DriverWait.until(EC.url_changes(__URL_LOGIN))
-        time.sleep(1)
+        # Wait for the page to change to give confirmation of successful login.
+        self.__DriverWait.until(EC.url_changes(self.__URL_LOGIN))
 
         # Update the AuthToken for this ESPN account to allow API interactions.
-        self.AuthToken = self.__Driver.get_cookie("espn_s2")["value"]
+        # Previous wait condition is iffy, attempt to read cookie up to 5 times.
+        attempt = 0
+        while self.AuthToken is None and attempt < 5:
+            try:
+                time.sleep(1)
+                self.AuthToken = self.__Driver.get_cookie("espn_s2")["value"]
+            except:
+                attempt += 1
+
+        if self.AuthToken is None:
+            raise Exception(f"{self.EMail}: Failed to Login")
 
 
     def register(self) -> None:
