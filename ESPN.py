@@ -1,9 +1,10 @@
-from dotenv import load_dotenv
 from exceptions.BracketSubmissionException import BracketSubmissionException
+from exceptions.EmailAvailabilityException import EmailAvailabilityException
 from exceptions.EmailTakenException import EmailTakenException
 from exceptions.EntryIdMismatchException import EntryIdMismatchException
 from exceptions.InvalidEmailException import InvalidEmailException
-from GMail import get_code
+from exceptions.RegistrationException import RegistrationException
+from GMail import get_two_factor_code
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.chrome.options import Options
@@ -12,44 +13,34 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from typing import List, Optional
+from typing import List
+from util import build_submission_payload
 from utils import LOGGER
-import json
 import os
-import re
 import requests
 import time
 
-load_dotenv(dotenv_path="./.env")
 
-
-ELEMENT_IFRAME = "//iframe[@name='oneid-iframe']"
+ELEMENT_IFRAME = "//iframe[@name='disneyid-iframe']"
 ELEMENT_INPUT_BUTTON_SIGNUP = "//button[@id='BtnCreateAccount']"
-ELEMENT_INPUT_BUTTON_SUBMIT = "//button[@id='BtnSubmit']"
-ELEMENT_INPUT_TEXT_CODE = "//input[@id='InputRedeemOTP']"
+ELEMENT_INPUT_BUTTON_SUBMIT = "//button[@type='submit']"
+ELEMENT_INPUT_TEXT_CODE = "//input[@placeholder='Code']"
 ELEMENT_INPUT_TEXT_EMAIL = "//input[@type='email']"
-ELEMENT_INPUT_TEXT_NAME_FIRST = "//input[@id='InputFirstName']"
-ELEMENT_INPUT_TEXT_NAME_LAST = "//input[@id='InputLastName']"
 ELEMENT_INPUT_TEXT_PASSWORD = "//input[@type='password']"
 
-PARAMS_BRACKET_CREATE = {"r": "entry", "t1": 72, "t2": 65}
-
-URL_ENDPOINT_BRACKET_CREATE = "/createOrUpdateEntry"
-URL_ENDPOINT_BRACKET_ENTRY = "/entry\?entryID=(\d+)"
-
-URL_TOURNAMENT_CHALLENGE = "https://fantasy.espn.com/tournament-challenge-bracket/2023/en"
-URL_VALIDATE_EMAIL = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD/validate"
 
 class ESPN:
 
-
     AuthToken: str
     Email: str
+    Id: str
+
     __Driver: WebDriver
     __DriverWait: WebDriverWait
 
     __CONFIG = {}
 
+    __ENDPOINT_BRACKET_CREATE = "/apis/v1/challenges/240/entries?platform=chui&view=chui_default"
     __ENDPOINT_EMAIL_AVAILABILITY = "/validate"
     __ENDPOINT_REGISTER = "/guest/register"
 
@@ -78,6 +69,8 @@ class ESPN:
     }
 
     __URL = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD"
+    __URL_LOGIN = "https://espn.com/login"
+    __URL_TOURNAMENT_CHALLENGE = "https://gambit-api.fantasy.espn.com"
 
 
     def __init__(self, email: str):
@@ -96,7 +89,8 @@ class ESPN:
         except:
             raise Exception("Environment Variables Missing, Please Check Requirements in README")
 
-        self.Email = email
+        self.Email = f"{self.__CONFIG['EMAIL']}+{email}@gmail.com"
+        self.Id = email
 
 
     def __enter__(self):
@@ -114,7 +108,6 @@ class ESPN:
     def __create_driver(self) -> WebDriver:
         """
         Create a Selenium WebDriver instance to navigate ESPN.
-        The instance will have headless mode enabled to prevent unnecessary rendering.
 
         Returns
         -------
@@ -122,27 +115,26 @@ class ESPN:
             A Selenium WebDriver instance to navigate ESPN.
         """
         driver_options: Options = Options()
-        driver_options.add_argument("--disable-dev-shm-usage")
+        # driver_options.add_argument("--disable-dev-shm-usage")
         driver_options.add_argument("--headless")
         driver_options.add_argument("--incognito")
-        driver_options.add_argument('--log-level=3')
-        driver_options.add_argument('--no-sandbox')
+        driver_options.add_argument("--log-level=3")
+        # driver_options.add_argument('--no-sandbox')
 
         return webdriver.Chrome(options=driver_options)
 
 
+    # TODO: Review
     def check_availability(self) -> None:
         payload: dict = {"email": self.Email}
         url: str = self.__URL + self.__ENDPOINT_EMAIL_AVAILABILITY
 
         response: requests.Response = requests.post(url, json=payload)
-        if response.ok and response.status_code == 200:
-            return
+        if not response.ok or response.status_code != 200:
+            if "ACCOUNT_FOUND" in response.text:
+                raise EmailTakenException
 
-        if "ACCOUNT_FOUND" in response.text:
-            raise EmailTakenException
-
-        raise Exception(f"{self.Email}: Failed to Check Email Availability, {response.text}")
+            raise EmailAvailabilityException(response.text)
 
 
     def get_element(self, xpath: str, isInput: bool = True) -> WebElement:
@@ -230,61 +222,46 @@ class ESPN:
             raise Exception(f"{self.EMail}: Failed to Login")
 
 
+    # TODO: Review
     def register(self) -> None:
         self.check_availability()
 
         payload: dict = self.__PAYLOAD_REGISTER.copy()
-        payload["displayName"] = {"proposedDisplayName": self.__CONFIG["USERNAME"] + id}
+        payload["displayName"] = {"proposedDisplayName": self.__CONFIG["USERNAME"] + self.Id}
         payload["profile"]["email"] = self.Email
-        payload["profile"]["username"] = self.__CONFIG["USERNAME"] + id
+        payload["profile"]["username"] = self.__CONFIG["USERNAME"] + self.Id
 
         url: str = self.__URL + self.__ENDPOINT_REGISTER
 
         response: requests.Response = requests.post(url, json=payload, headers=self.__HEADERS, params=self.__PARAMS_REGISTER)
         if not response.ok or response.status_code != 200:
-            raise Exception(f"{self.Email}: Failed to Register, {response.text}")
+            raise RegistrationException(response.text)
 
 
-    def submit(self, bracket: str, entryId: Optional[int]) -> int:
+    def submit(self, bracket: str) -> str:
         """
         Submit a bracket to ESPN.
 
         Parameters
         ----------
         bracket : str
-        entryId : Optional[int]
 
         Returns
         -------
-        int
-            The EntryId associated with the bracket that was submitted.
+        str - The Id associated with the bracket that was submitted.
 
         Raises
         ------
-        EntryIdMismatchException
         BracketSubmissionException
         """
-        headers: dict = {"cookie": f"espn_s2={self.AuthToken}"}
+        headers: dict = self.__HEADERS.copy()
+        headers["Cookie"] = f"espn_s2={self.AuthToken}"
 
-        params: dict = {"b": bracket, **PARAMS_BRACKET_CREATE}
-        if entryId is not None:
-            params["entryID"] = entryId
+        payload: dict = build_submission_payload(bracket)
+        url: str = self.__URL_TOURNAMENT_CHALLENGE + self.__ENDPOINT_BRACKET_CREATE
 
-        url: str = URL_TOURNAMENT_CHALLENGE + URL_ENDPOINT_BRACKET_CREATE
+        response: requests.Response = requests.post(url, data=payload, headers=headers)
+        if not response.ok or response.status_code != 200:
+            raise BracketSubmissionException(f"{self.Email}: Failed to Submit, {response.text}")
 
-        try:
-            response: requests.Response = requests.get(url, headers=headers, params=params)
-            if response.status_code != 200:
-                raise BracketSubmissionException(f"Status Code = {response.status_code}")
-
-            entryIdMatch = re.search(fr"{URL_TOURNAMENT_CHALLENGE + URL_ENDPOINT_BRACKET_ENTRY}", response.text)
-            if entryIdMatch is not None:
-                entryIdNew: int = int(entryIdMatch.group(1))
-                if entryId is not None and entryId != entryIdNew:
-                    raise EntryIdMismatchException(f"{entryId} vs. {entryIdNew}")
-
-                return entryIdNew
-
-            raise BracketSubmissionException("Failed to Find EntryId")
-        except Exception:
-            raise BracketSubmissionException("Unknown Exception")
+        return response.json()["id"]
