@@ -164,6 +164,7 @@ class ESPN:
         """
         Login to ESPN to obtain the AuthToken for API interacion.
         """
+        LOGGER.info(f"{self.Email}: Attempting to Login")
         self.__Driver.get(self.__URL_LOGIN)
         time.sleep(1)
 
@@ -207,6 +208,7 @@ class ESPN:
         while time.time() - start < 10:
             try:
                 self.AuthToken = self.__Driver.get_cookie("espn_s2")["value"]
+                LOGGER.info(f"{self.Email}: Successfully Logged In")
                 return
             except:
                 time.sleep(1)
