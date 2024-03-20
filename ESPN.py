@@ -1,7 +1,6 @@
 from exceptions.BracketSubmissionException import BracketSubmissionException
 from exceptions.EmailAvailabilityException import EmailAvailabilityException
 from exceptions.EmailTakenException import EmailTakenException
-from exceptions.RegistrationException import RegistrationException
 from Gmail import Gmail
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
@@ -94,12 +93,16 @@ class ESPN:
         return webdriver.Chrome(options=driver_options)
 
 
-    # TODO: Review
     def check_availability(self) -> None:
-        payload: dict = {"email": self.Email}
-        url: str = self.__URL + self.__ENDPOINT_EMAIL_AVAILABILITY
+        headers: dict = {
+            "Content-Type": "application/json"
+        }
+        payload: dict = {
+            "email": self.Email
+        }
+        url: str = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD/validate"
 
-        response: requests.Response = requests.post(url, json=payload)
+        response: requests.Response = requests.post(url, data=json.dumps(payload), headers=headers)
         if not response.ok or response.status_code != 200:
             if "ACCOUNT_FOUND" in response.text:
                 raise EmailTakenException
@@ -131,6 +134,8 @@ class ESPN:
         """
         try:
             elements: List[WebElement] = self.__Driver.find_elements(by=By.XPATH, value=xpath)
+            if len(elements) == 2 and xpath == ELEMENT_LINK_SIGNUP:
+                return elements[1]
             assert len(elements) == 1 and elements[0].is_displayed() and (elements[0].is_enabled() if isInput else True)
 
             return elements[0]
@@ -143,6 +148,14 @@ class ESPN:
         Login to ESPN to obtain the AuthToken for API interacion.
         """
         LOGGER.info(f"{self.Email}: Attempting to Login")
+
+        try:
+            self.check_availability()
+            self.register()
+            return
+        except EmailTakenException:
+            pass
+
         self.__Driver.get(self.__URL_LOGIN)
         time.sleep(1)
 

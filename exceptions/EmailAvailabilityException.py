@@ -1,0 +1,2 @@
+class EmailAvailabilityException(Exception):
+    pass
