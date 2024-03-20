@@ -194,32 +194,32 @@ class ESPN:
             LOGGER.warning(f"{self.Email}: Code Required for Login")
 
             # Retrieve the code from GMail and enter the form data.
-            self.get_element(ELEMENT_INPUT_TEXT_CODE).send_keys(get_two_factor_code(self.Email))
-            time.sleep(1)
+            with Gmail() as gmail:
+                code: str = gmail.get_code(self.Email)
+                LOGGER.info(f"{self.Email}: Code Retrieved, Code='{code}'")
+
+                self.get_element(ELEMENT_INPUT_TEXT_CODE).send_keys(code)
+                time.sleep(1)
 
             # Submit the login form.
             self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).click()
         except TimeoutException:
-            pass
-        except Exception as e:
-            LOGGER.error(f"{self.Email}: Failed to Provide Code, {e}")
             pass
 
         # Wait for the page to change to give confirmation of successful login.
         self.__DriverWait.until(EC.url_changes(self.__URL_LOGIN))
 
         # Update the AuthToken for this ESPN account to allow API interactions.
-        # Previous wait condition is iffy, attempt to read cookie up to 5 times.
-        attempt = 0
-        while self.AuthToken is None and attempt < 5:
+        # Previous wait condition is iffy, attempt to read cookie for up to 10 seconds.
+        start: float = time.time()
+        while time.time() - start < 10:
             try:
-                time.sleep(1)
                 self.AuthToken = self.__Driver.get_cookie("espn_s2")["value"]
+                return
             except:
-                attempt += 1
+                time.sleep(1)
 
-        if self.AuthToken is None:
-            raise Exception(f"{self.EMail}: Failed to Login")
+        raise Exception(f"{self.Email}: Failed to Login")
 
 
     # TODO: Review
@@ -269,4 +269,7 @@ class ESPN:
         if not response.ok or response.status_code != 200:
             raise BracketSubmissionException(f"{self.Email}: Failed to Submit, {response.status_code} - {response.text}")
 
-        return response.json()["id"]
+        id: str = response.json()["id"]
+        LOGGER.info(f"{self.Email}: Successfully Submitted Bracket, Id='{id}', Bracket='{bracket}'")
+
+        return id
