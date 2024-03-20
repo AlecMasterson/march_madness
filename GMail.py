@@ -1,68 +1,62 @@
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
-from typing import Optional
-from utils import LOGGER
+from googleapiclient.discovery import build, Resource
+from typing import Any, Dict, Match, Optional
 import os.path
 import re
 import time
 
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
-def login():
-    creds = None
+class Gmail:
 
-    if os.path.exists("gmail_token.json"):
-        creds = Credentials.from_authorized_user_file("gmail_token.json", SCOPES)
+    __SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file("gmail_credentials.json", SCOPES)
-            creds = flow.run_local_server(port=0)
-
-        with open("gmail_token.json", "w") as token:
-            token.write(creds.to_json())
-
-    return build("gmail", "v1", credentials=creds)
-GMAIL = login()
+    __Client: Resource
 
 
-def get_code(email: str) -> str:
-    retry = True
+    def __enter__(self):
+        credentials: Optional[Credentials] = None
 
-    while retry:
-        time.sleep(10)
-        code = __get_code_from_email(GMAIL, email)
-        if code is not None:
-            return code
+        if os.path.exists("gmail_token.json"):
+            credentials = Credentials.from_authorized_user_file("gmail_token.json", self.__SCOPES)
 
-        # LOGGER.warning(f"{email}: Code Not Found, Waiting...")
-        time.sleep(2)
+        if credentials is None or not credentials.valid:
+            if credentials is not None and credentials.expired and credentials.refresh_token:
+                credentials.refresh(Request())
+            else:
+                credentials = InstalledAppFlow.from_client_secrets_file("gmail_credentials.json", self.__SCOPES).run_local_server(port=0)
+
+            with open("gmail_token.json", "w") as file:
+                file.write(credentials.to_json())
+                file.close()
+
+        self.__Client = build("gmail", "v1", credentials=credentials)
+
+        return self
 
 
-def __get_code_from_email(gmail, email: str) -> Optional[str]:
-    messages = gmail.users().messages().list(userId="me").execute().get("messages", [])
+    def __exit__(self, *_):
+        pass
 
-    for message in reversed(messages):
-        message = gmail.users().messages().get(id=message["id"], userId="me").execute()
 
-        subject = [header for header in message["payload"]["headers"] if header["name"] == "Subject"]
-        assert len(subject) == 1
-        if subject[0]["value"] != "Your ESPN Account Passcode":
-            continue
+    def get_code(self, email: str) -> str:
+        start: float = time.time()
 
-        to = [header for header in message["payload"]["headers"] if header["name"] == "To"]
-        assert len(to) == 1
-        if to[0]["value"] != email:
-            continue
+        while time.time() - start < 15:
+            messages: Dict[str, Any] = self.__Client.users().messages().list(q=f"to:{email}", userId="me").execute()
 
-        passcodeSearch = re.search(r"Here is your one-time ESPN account passcode: (\d+)", message["snippet"])
-        if passcodeSearch is None:
-            raise Exception("Could Not Find Passcode")
+            for temp in (messages["messages"] if "messages" in messages else []):
+                message: Dict[str, Any] = self.__Client.users().messages().get(id=temp["id"], userId="me").execute()
 
-        return str(passcodeSearch.group(1))
+                subject: str = [header["value"] for header in message["payload"]["headers"] if header["name"] == "Subject"][0]
+                if subject == "Your ESPN Account Passcode":
+                    result: Optional[Match] = re.search(r"Here is your one-time ESPN account passcode: (\d+)", message["snippet"])
+                    if result is None:
+                        raise Exception(f"Could Not Find Passcode in Email: {message['snippet']}")
 
-    return None
+                    return str(result.group(1))
+
+            time.sleep(1)
+
+        raise Exception("Failed to Find Passcode Email")
