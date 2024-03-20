@@ -21,11 +21,16 @@ import time
 
 
 ELEMENT_IFRAME = "//iframe[@name='disneyid-iframe']"
-ELEMENT_INPUT_BUTTON_SIGNUP = "//button[@id='BtnCreateAccount']"
+ELEMENT_IFRAME_SIGNUP = "//iframe[@name='oneid-iframe']"
 ELEMENT_INPUT_BUTTON_SUBMIT = "//button[@type='submit']"
 ELEMENT_INPUT_TEXT_CODE = "//input[@placeholder='Code']"
 ELEMENT_INPUT_TEXT_EMAIL = "//input[@type='email']"
+ELEMENT_INPUT_TEXT_NAME_FIRST = "//input[@placeholder='First Name']"
+ELEMENT_INPUT_TEXT_NAME_LAST = "//input[@placeholder='Last Name']"
 ELEMENT_INPUT_TEXT_PASSWORD = "//input[@type='password']"
+
+ELEMENT_LINK_SIGNUP = "//a[@tref='/members/v3_1/login' and text()='Sign Up']"
+ELEMENT_LINK_USER = "//a[@id='global-user-trigger']"
 
 
 class ESPN:
@@ -38,30 +43,7 @@ class ESPN:
 
     __CONFIG = {}
 
-    __ENDPOINT_EMAIL_AVAILABILITY = "/validate"
-    __ENDPOINT_REGISTER = "/guest/register"
-
-    __PARAMS_REGISTER = {
-        "autogeneratePassword": False,
-        "autogenerateUsername": False,
-        "feature": "no-password-reuse",
-        "langPref": "en-US"
-    }
-
-    __PAYLOAD_REGISTER = {
-        # "displayName": {"proposedDisplayName": username}
-        "legalAssertions": ["gtou_ppv2_proxy"],
-        # "password": password,
-        "profile": {
-            # "email": email
-            # "firstName": firstName,
-            # "lastName": lastName,
-            "region": "US"
-            # "username": username
-        }
-    }
-
-    __URL = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD"
+    __URL = "https://espn.com"
     __URL_LOGIN = "https://espn.com/login"
 
 
@@ -74,10 +56,6 @@ class ESPN:
                 "PASSWORD": os.environ["PASSWORD"],
                 "USERNAME": os.environ["USER_NAME"]
             }
-
-            self.__PAYLOAD_REGISTER["password"] = self.__CONFIG["PASSWORD"]
-            self.__PAYLOAD_REGISTER["profile"]["firstName"] = self.__CONFIG["NAME_FIRST"]
-            self.__PAYLOAD_REGISTER["profile"]["lastName"] = self.__CONFIG["NAME_LAST"]
         except:
             raise Exception("Environment Variables Missing, Please Check Requirements in README")
 
@@ -180,56 +158,75 @@ class ESPN:
         # Submit the login form.
         self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).click()
 
-        try:
-            # Wait to see if an additional code is required for login.
-            # If not required, this will quietly throw a TimeoutException.
-            self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_INPUT_TEXT_CODE)))
-            LOGGER.warning(f"{self.Email}: Code Required for Login")
+        self.__submit_gmail_code()
+        self.__get_token()
 
-            # Retrieve the code from GMail and enter the form data.
-            with Gmail() as gmail:
-                code: str = gmail.get_code(self.Email)
-                LOGGER.info(f"{self.Email}: Code Retrieved, Code='{code}'")
 
-                self.get_element(ELEMENT_INPUT_TEXT_CODE).send_keys(code)
-                time.sleep(1)
+    def register(self) -> None:
+        """
+        Register with ESPN to obtain the AuthToken for API interacion.
+        """
+        LOGGER.info(f"{self.Email}: Attempting to Signup")
+        self.__Driver.get(self.__URL)
 
-            # Submit the login form.
-            self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).click()
-        except TimeoutException:
-            pass
+        self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_LINK_USER)))
+        self.get_element(ELEMENT_LINK_USER, isInput=False).click()
 
-        # Wait for the page to change to give confirmation of successful login.
-        self.__DriverWait.until(EC.url_changes(self.__URL_LOGIN))
+        self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_LINK_SIGNUP)))
+        self.get_element(ELEMENT_LINK_SIGNUP, isInput=False).click()
 
-        # Update the AuthToken for this ESPN account to allow API interactions.
-        # Previous wait condition is iffy, attempt to read cookie for up to 10 seconds.
+        self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_IFRAME_SIGNUP)))
+        self.__Driver.switch_to.frame(self.get_element(ELEMENT_IFRAME_SIGNUP, isInput=False))
+
+        self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_INPUT_TEXT_EMAIL)))
+        self.get_element(ELEMENT_INPUT_TEXT_EMAIL).send_keys(self.Email)
+        time.sleep(1)
+
+        self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).click()
+
+        self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_INPUT_TEXT_NAME_FIRST)))
+        self.get_element(ELEMENT_INPUT_TEXT_NAME_FIRST).send_keys(self.__CONFIG["NAME_FIRST"])
+        self.get_element(ELEMENT_INPUT_TEXT_NAME_LAST).send_keys(self.__CONFIG["NAME_LAST"])
+        self.get_element(ELEMENT_INPUT_TEXT_PASSWORD).send_keys(self.__CONFIG["PASSWORD"])
+        time.sleep(1)
+
+        self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).click()
+
+        self.__submit_gmail_code()
+        self.__get_token()
+
+
+    def __get_token(self) -> None:
         start: float = time.time()
         while time.time() - start < 10:
             try:
                 self.AuthToken = self.__Driver.get_cookie("espn_s2")["value"]
-                LOGGER.info(f"{self.Email}: Successfully Logged In")
+                LOGGER.info(f"{self.Email}: Successfully Got Token")
                 return
             except:
                 time.sleep(1)
 
-        raise Exception(f"{self.Email}: Failed to Login")
+        raise Exception(f"{self.Email}: Failed to Get Token")
 
 
-    # TODO: Review
-    def register(self) -> None:
-        self.check_availability()
+    def __submit_gmail_code(self) -> None:
+        try:
+            # Wait to see if an additional code is required for login.
+            # If not required, this will quietly throw a TimeoutException.
+            self.__DriverWait.until(EC.presence_of_element_located((By.XPATH, ELEMENT_INPUT_TEXT_CODE)))
+            LOGGER.warning(f"{self.Email}: Code Required")
 
-        payload: dict = self.__PAYLOAD_REGISTER.copy()
-        payload["displayName"] = {"proposedDisplayName": self.__CONFIG["USERNAME"] + self.Id}
-        payload["profile"]["email"] = self.Email
-        payload["profile"]["username"] = self.__CONFIG["USERNAME"] + self.Id
+            # Retrieve the code from GMail and enter the form data.
+            with Gmail() as gmail:
+                code: str = gmail.get_code(self.Email)
+                LOGGER.info(f"{self.Email}: Successfully Got Code, Code='{code}'")
 
-        url: str = self.__URL + self.__ENDPOINT_REGISTER
+                self.get_element(ELEMENT_INPUT_TEXT_CODE).send_keys(code)
+                time.sleep(1)
 
-        response: requests.Response = requests.post(url, json=payload, headers=self.__HEADERS, params=self.__PARAMS_REGISTER)
-        if not response.ok or response.status_code != 200:
-            raise RegistrationException(response.text)
+            self.get_element(ELEMENT_INPUT_BUTTON_SUBMIT).click()
+        except TimeoutException:
+            pass
 
 
     def submit(self, bracket: str) -> str:
