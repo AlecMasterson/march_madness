@@ -53,10 +53,10 @@ class Gmail:
                 if subject == "Your ESPN Account Passcode":
                     result: Optional[Match] = re.search(r"Here is your one-time ESPN account passcode: (\d+)", message["snippet"])
                     if result is None:
-                        raise Exception(f"Could Not Find Passcode in Email: {message['snippet']}")
+                        raise Exception(f"{email}: Could Not Find Passcode in Email: {message['snippet']}")
 
                     return str(result.group(1))
 
             time.sleep(1)
 
-        raise Exception("Failed to Find Passcode Email")
+        raise Exception(f"{email}: Failed to Find Passcode Email")

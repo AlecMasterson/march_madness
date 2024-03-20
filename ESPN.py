@@ -1,10 +1,8 @@
 from exceptions.BracketSubmissionException import BracketSubmissionException
 from exceptions.EmailAvailabilityException import EmailAvailabilityException
 from exceptions.EmailTakenException import EmailTakenException
-from exceptions.EntryIdMismatchException import EntryIdMismatchException
-from exceptions.InvalidEmailException import InvalidEmailException
 from exceptions.RegistrationException import RegistrationException
-from GMail import get_two_factor_code
+from Gmail import Gmail
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.chrome.options import Options
@@ -13,9 +11,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from typing import List
+from typing import List, Optional
 from util import build_submission_payload
 from utils import LOGGER
+import json
 import os
 import requests
 import time
@@ -31,22 +30,16 @@ ELEMENT_INPUT_TEXT_PASSWORD = "//input[@type='password']"
 
 class ESPN:
 
-    AuthToken: str
+    AuthToken: Optional[str]
     Email: str
-    Id: str
 
     __Driver: WebDriver
     __DriverWait: WebDriverWait
 
     __CONFIG = {}
 
-    __ENDPOINT_BRACKET_CREATE = "/apis/v1/challenges/240/entries?platform=chui&view=chui_default"
     __ENDPOINT_EMAIL_AVAILABILITY = "/validate"
     __ENDPOINT_REGISTER = "/guest/register"
-
-    __HEADERS = {
-        "Content-Type": "application/json"
-    }
 
     __PARAMS_REGISTER = {
         "autogeneratePassword": False,
@@ -70,7 +63,6 @@ class ESPN:
 
     __URL = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD"
     __URL_LOGIN = "https://espn.com/login"
-    __URL_TOURNAMENT_CHALLENGE = "https://gambit-api.fantasy.espn.com"
 
 
     def __init__(self, email: str):
@@ -89,8 +81,8 @@ class ESPN:
         except:
             raise Exception("Environment Variables Missing, Please Check Requirements in README")
 
-        self.Email = f"{self.__CONFIG['EMAIL']}+{email}@gmail.com"
-        self.Id = email
+        self.AuthToken = None
+        self.Email = email
 
 
     def __enter__(self):
