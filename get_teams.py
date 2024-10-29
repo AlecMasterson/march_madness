@@ -2,13 +2,14 @@ from typing import List
 import json
 import pandas
 import requests
+from security import safe_requests
 
 __CHALLENGE_ID = 240
 __SEED_ORDER = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15]
 __YEAR = 2024
 
 
-response: requests.Response = requests.get(f"https://gambit-api.fantasy.espn.com/apis/v1/propositions?challengeId={__CHALLENGE_ID}&platform=chui&view=chui_default")
+response: requests.Response = safe_requests.get(f"https://gambit-api.fantasy.espn.com/apis/v1/propositions?challengeId={__CHALLENGE_ID}&platform=chui&view=chui_default")
 data: List[dict] = response.json()
 data: List[dict] = sorted(data, key=lambda x: (x["scoringPeriodId"], x["scoringPeriodMatchupId"]))
 

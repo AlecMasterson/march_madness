@@ -4,6 +4,7 @@ import pandas
 import re
 import requests
 import tqdm
+from security import safe_requests
 
 URL_ENTRY = "https://fantasy.espn.com/tournament-challenge-bracket/2023/en/entry?entryID="
 
@@ -11,7 +12,7 @@ URL_ENTRY = "https://fantasy.espn.com/tournament-challenge-bracket/2023/en/entry
 # entryId: str = "86848038"
 
 def get_bracket_info(entryId: str) -> dict:
-    response: requests.Response = requests.get(URL_ENTRY + entryId)
+    response: requests.Response = safe_requests.get(URL_ENTRY + entryId)
     if response.status_code != 200:
         raise Exception(f"Failed to get EntryId '{entryId}'")
 
