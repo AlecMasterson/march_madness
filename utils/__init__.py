@@ -20,12 +20,12 @@ def __create_logger() -> logging.Logger:
     fileFormatter = logging.Formatter("[%(asctime)s] - [%(levelname)s] - [" + str(uuid.uuid4()) + "] - [%(module)s] - [%(funcName)s] - %(message)s")
 
     fileHandler = TimedRotatingFileHandler(fileName, when="d", interval=1,  backupCount=5)
-    fileHandler.setLevel(logging.INFO)
+    fileHandler.setLevel(logging.DEBUG)
     fileHandler.setFormatter(fileFormatter)
     logger.addHandler(fileHandler)
 
     streamHandler = logging.StreamHandler()
-    streamHandler.setLevel(logging.DEBUG)
+    streamHandler.setLevel(logging.INFO)
     logger.addHandler(streamHandler)
 
     def exception_handler(exc_type, exc_value, exc_traceback):

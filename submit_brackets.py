@@ -1,84 +1,113 @@
 from argparse import ArgumentParser
 from concurrent.futures import as_completed, Future, ProcessPoolExecutor, wait
-from ESPN import ESPN
+from ESPN import ESPN, submit_bracket
 from tqdm import tqdm
-from typing import List, Optional
+from typing import Any, List, Optional
 from utils import LOGGER
+import multiprocessing
+import numpy
+import os
 import pandas
+import queue
+import requests
+import threading
+import time
 
-INPUT_EMAIL = "alecjmasterson+####@gmail.com"
+
+LOCK = multiprocessing.Lock()
+SUBMISSIONS = pandas.read_csv("./data/2024/submissions.csv", dtype={"bracket": str, "email": int, "id": str, "score": float, "submitted": bool, "validated": bool})
+WORKERS = [[i, True] for i in range(4)]
 
 
-def main(submissions: pandas.DataFrame, emails: List[str]) -> None:
-    futures: List[Future] = []
+def main(df: pandas.DataFrame, emails: List[str]) -> None:
+    results: List[List[tuple]] = []
 
-    with ProcessPoolExecutor(max_workers=8) as executor:
-        futures = [executor.submit(submit, submissions, email) for email in emails]
+    with ProcessPoolExecutor(max_workers=2) as executor:
+        futures: List[Future] = [executor.submit(submit, 0, df, email) for email in emails]
 
-        for _ in tqdm(as_completed(futures), total=len(futures)):
+        for future in tqdm(as_completed(futures), total=len(futures)):
+            results.append(future.result())
+
+    results: List[List[tuple]] = [future.result() for future in futures]
+    for result in numpy.array(results).flatten():
+        df.loc[result[0], "id"] = result[1]
+        df.loc[result[0], "submitted"] = True
+
+
+def submit(worker: int, df: pandas.DataFrame, emailId: str) -> List[tuple]:
+    brackets: pandas.DataFrame = df[(df["email"] == int(emailId)) & (~df["submitted"])]
+    email: str = f"masterson.march.madness+{emailId}@gmail.com"
+    results: List[tuple] = []
+
+    if len(brackets) == 0:
+        return results
+
+    response: requests.Response = requests.get(f"http://localhost:800{worker}/get_token/{emailId}", timeout=30)
+    if not response.ok or response.status_code != 200 or response.text == "":
+        LOGGER.error(f"{email}: Failed to Get Token, {response.status_code} - {response.text}")
+
+    for index, row in brackets.iterrows():
+        try:
+            results.append((index, submit_bracket(email, response.text, row["bracket"])))
+        except:
             pass
 
-        wait(futures)
-
-    results: List[tuple] = [future.result() for future in futures]
-    for result in [result for result in results if result[0]]:
-        for entry in result[2]:
-            submissions.loc[entry[0], "id"] = entry[1]
-            submissions.loc[entry[0], "submitted"] = True
-    LOGGER.error(f"Failed for {[result[1] for result in results if not result[0]]}")
+    return results
 
 
-def submit(submissions: pandas.DataFrame, email: str) -> tuple:
-    results = []
+def submit_wrapper(df: pandas.DataFrame, emailId: str, results) -> None:
+    global SUBMISSIONS
+    global WORKERS
+    worker: int = -1
 
-    if submissions[submissions["email"] == email]["submitted"].all() and (submissions[submissions["email"] == email]["id"] != -1).all():
-        # LOGGER.info(f"{email}: All Submitted, Skipping")
-        return (True, email, results)
+    while worker == -1:
+        with LOCK:
+            options: List[int] = [x[0] for x in WORKERS if x[1]]
+            worker = options[0] if len(options) > 0 else -1
+            if worker != -1:
+                LOGGER.info(f"{emailId}: Locking Worker, Worker='{worker}'")
+                WORKERS[worker][1] = False
+        if worker == -1:
+            time.sleep(1)
 
-    with ESPN(email) as espn:
-        try:
-            espn.login()
-        except:
-            return(False, email, results)
+    temp: List[tuple] = []
+    try:
+        temp = submit(worker, df, emailId)
+        results.put(temp)
+    except Exception as e:
+        LOGGER.error(f"{emailId}: Failed - {e}")
+        pass
 
-        for index, row in submissions[submissions["email"] == email].iterrows():
-            try:
-                if row["validated"]:
-                    continue
+    with LOCK:
+        for result in temp:
+            SUBMISSIONS.loc[result[0], "id"] = result[1]
+            SUBMISSIONS.loc[result[0], "submitted"] = True
+        SUBMISSIONS.to_csv("./data/2024/submissions.csv", index=False)
 
-                entryId: Optional[str] = None if row["id"] == -1 else row["id"]
-                entryId: str = espn.submit(row["bracket"], entryId)
+        LOGGER.info(f"{emailId}: Unlocking Worker, Worker='{worker}'")
+        WORKERS[worker][1] = True
 
-                results.append((index, entryId))
-            except Exception as e:
-                LOGGER.error(f"{email}: Failed to Submit for email={email} index={index}, {e}")
-
-    return (True, email, results)
 
 if __name__ == "__main__":
-    parser = ArgumentParser(description="Tool for Submitting \"March Madness\" Brackets to ESPN")
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("--emails", dest="EMAILS", help="a list of emails to submit the brackets for, format ####", nargs="+", type=str)
-    group.add_argument("--range", dest="RANGE", help="a range of emails to submit the brackets for, format ####:####", type=str)
-    args = parser.parse_args()
+    emailIds: List[str] = list(set([str(i) for i in SUBMISSIONS["email"] if i < 1001 and len(SUBMISSIONS[(SUBMISSIONS["email"] == int(i)) & (~SUBMISSIONS["submitted"])]) > 0]))
+    results = queue.Queue()
+    threads = []
 
-    submissions = pandas.read_csv("./data/2023/submissions.csv", dtype={"id": int, "score": float, "submitted": bool, "validated": bool})
+    for emailId in emailIds:
+        thread = threading.Thread(args=(SUBMISSIONS, emailId, results), target=submit_wrapper)
+        thread.start()
+        threads.append(thread)
 
-    emails: List[str] = []
-    if args.EMAILS is not None:
-        emails = [INPUT_EMAIL.replace("####", email) for email in args.EMAILS]
-    if args.RANGE is not None:
-        temp: List[str] = args.RANGE.split(":")
-        emails = [INPUT_EMAIL.replace("####", str(email)) for email in range(int(temp[0]), int(temp[1]))]
+    with tqdm(total=len(threads)) as pbar:
+        for thread in threads:
+            thread.join()
+            pbar.update(1)
 
-    emails = [email for email in emails if (submissions["email"].eq(email)).any()]
+    """
+    while not results.empty():
+        for result in results.get():
+            SUBMISSIONS.loc[result[0], "id"] = result[1]
+            SUBMISSIONS.loc[result[0], "submitted"] = True
 
-    if len(emails) > 0:
-        LOGGER.info(f"Attempting to Submit Brackets for {len(emails)} Email(s)")
-        #for email in tqdm(emails):
-        #    submit(submissions, email)
-        main(submissions, emails)
-    else:
-        LOGGER.warning("No Emails Provided to Submit")
-
-    submissions.to_csv("./data/2023/submissions.csv", index=False)
+    SUBMISSIONS.to_csv("./data/2024/submissions.csv", index=False)
+    """

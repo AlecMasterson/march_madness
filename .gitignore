@@ -4,3 +4,7 @@ gmail_*.json
 .env
 node_modules
 .idea/
+
+test*.py
+test.txt
+data/screenshots/

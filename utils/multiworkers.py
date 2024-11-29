@@ -37,8 +37,8 @@ def __use_worker(func: Callable[[int], bool], id: int) -> None:
 
         try:
             isSuccess = func(worker, id)
-        except:
-            LOGGER.error(f"{id}: Failed to Get Result")
+        except Exception as e:
+            LOGGER.error(f"{id}: Failed to Get Result, {e}")
         finally:
             with __LOCK:
                 LOGGER.debug(f"{id}: isSuccess='{isSuccess}'")

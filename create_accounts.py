@@ -1,8 +1,10 @@
 from argparse import ArgumentParser
 from ESPN import ESPN
+from exceptions.EmailAvailabilityException import EmailAvailabilityException
 from exceptions.EmailTakenException import EmailTakenException
+from exceptions.RegistrationException import RegistrationException
 from tqdm import tqdm
-from typing import List
+from typing import List, Set
 from utils import LOGGER
 import os
 
@@ -13,17 +15,30 @@ def register(email: str) -> bool:
             espn.register()
 
         return True
+    except EmailAvailabilityException as e:
+        LOGGER.error(f"{email}: Failed to Check Email Availability, {e}")
     except EmailTakenException:
         return True
-    except Exception:
-        return False
+    except RegistrationException as e:
+        LOGGER.error(f"{email}: Failed to Register Email, {e}")
+    except Exception as e:
+        LOGGER.error(f"{email}: Unknown Error, {e}")
+
+    return False
 
 
 def main(emails: List[str]) -> None:
-    with open("./data/emails.txt", "a") as file:
-        for email in tqdm(emails):
+    with open("./data/emails.txt", "a+") as file:
+        file.seek(0)
+
+        emailsExisting: Set[str] = set(line.strip() for line in file)
+        emailsFiltered: Set[str] = set([email for email in emails if email not in emailsExisting])
+
+        for email in tqdm(emailsFiltered):
             if register(email):
                 file.write(email + "\n")
+                file.flush()
+
         file.close()
 
 
@@ -44,10 +59,6 @@ if __name__ == "__main__":
         emails = [email + f"+{i}@gmail.com" for i in args.EMAILS]
     if args.RANGE is not None:
         temp: List[str] = args.RANGE.split(":")
-        emails = [email + f"+{i}@gmail.com" for i in range(int(temp[0]), int(temp[1]))]
+        emails = [email + f"+{i}@gmail.com" for i in range(int(temp[0]), int(temp[1]) + 1)]
 
-    if len(emails) > 0:
-        LOGGER.info(f"Attempting to Register {len(emails)} Email(s) with ESPN")
-        main(emails)
-    else:
-        LOGGER.warning("No Emails Provided to Register with ESPN")
+    main(emails)
