@@ -17,9 +17,9 @@ from util import build_submission_payload
 from utils import LOGGER
 import json
 import os
-import random
 import requests
 import time
+import secrets
 
 
 ELEMENT_IFRAME = "//iframe[@name='disneyid-iframe']"
@@ -333,7 +333,7 @@ class ESPN:
             pass
 
     def __wait(self) -> None:
-        time.sleep(random.uniform(-0.5, 0.5) + random.uniform(1, 4))
+        time.sleep(secrets.SystemRandom().uniform(-0.5, 0.5) + secrets.SystemRandom().uniform(1, 4))
 
 
     def submit(self, bracket: str) -> str:
