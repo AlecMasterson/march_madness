@@ -12,6 +12,7 @@ import queue
 import requests
 import threading
 import time
+from security import safe_requests
 
 
 LOCK = multiprocessing.Lock()
@@ -42,7 +43,7 @@ def submit(worker: int, df: pandas.DataFrame, emailId: str) -> List[tuple]:
     if len(brackets) == 0:
         return results
 
-    response: requests.Response = requests.get(f"http://localhost:800{worker}/get_token/{emailId}", timeout=30)
+    response: requests.Response = safe_requests.get(f"http://localhost:800{worker}/get_token/{emailId}", timeout=30)
     if not response.ok or response.status_code != 200 or response.text == "":
         LOGGER.error(f"{email}: Failed to Get Token, {response.status_code} - {response.text}")
 
