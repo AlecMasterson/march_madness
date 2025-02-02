@@ -7,3 +7,4 @@ pandas
 requests
 selenium
 tqdm
+security==1.3.1
