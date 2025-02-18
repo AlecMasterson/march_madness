@@ -105,7 +105,7 @@ class ESPN:
         }
         url: str = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD/validate"
 
-        response: requests.Response = requests.post(url, data=json.dumps(payload), headers=headers)
+        response: requests.Response = requests.post(url, data=json.dumps(payload), headers=headers, timeout=60)
         if not response.ok or response.status_code != 200:
             if "ACCOUNT_FOUND" in response.text:
                 raise EmailTakenException
@@ -363,7 +363,7 @@ class ESPN:
         payload: dict = build_submission_payload(bracket)
         url: str = "https://gambit-api.fantasy.espn.com/apis/v1/challenges/240/entries"
 
-        response: requests.Response = requests.post(url, data=json.dumps(payload), headers=headers, params=params)
+        response: requests.Response = requests.post(url, data=json.dumps(payload), headers=headers, params=params, timeout=60)
         if not response.ok or response.status_code != 200:
             raise BracketSubmissionException(f"{self.Email}: Failed to Submit, {response.status_code} - {response.text}")
 
@@ -385,7 +385,7 @@ def submit_bracket(email: str, token: str, bracket: str) -> str:
     payload: dict = build_submission_payload(bracket)
     url: str = "https://gambit-api.fantasy.espn.com/apis/v1/challenges/240/entries"
 
-    response: requests.Response = requests.post(url, data=json.dumps(payload), headers=headers, params=params)
+    response: requests.Response = requests.post(url, data=json.dumps(payload), headers=headers, params=params, timeout=60)
     if not response.ok or response.status_code != 200:
         raise BracketSubmissionException(f"{email}: Failed to Submit, {response.status_code} - {response.text}")
 
