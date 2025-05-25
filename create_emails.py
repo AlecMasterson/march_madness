@@ -14,7 +14,7 @@ def check_availability(email: str) -> bool:
     }
     url: str = "https://registerdisney.go.com/jgc/v8/client/ESPN-ONESITE.WEB-PROD/validate"
 
-    response: requests.Response = requests.post(url, data=json.dumps(payload), headers=headers)
+    response: requests.Response = requests.post(url, data=json.dumps(payload), headers=headers, timeout=60)
     if not response.ok or response.status_code != 200:
         if "ACCOUNT_FOUND" in response.text:
             return False
