@@ -1,8 +1,8 @@
 from models.Game import Game
 from models.Team import Team
-import random
 import pandas
 import tqdm
+import secrets
 
 __SUBMISSIONS: pandas.DataFrame = pandas.read_csv("./data/2024/submissions.csv")
 __TEAMS: pandas.DataFrame = pandas.read_csv("./data/2024/teams.csv")
@@ -21,7 +21,7 @@ def build_bracket(teams: pandas.DataFrame, node: Game = Game()) -> Game:
         node.right = build_bracket(teams, Game(depth=node.depth+1))
         node.team2 = node.right.winner
 
-    node.winner = random.choices([node.team1, node.team2], k=1, weights=[node.team2.seed, node.team1.seed])[0]
+    node.winner = secrets.SystemRandom().choices([node.team1, node.team2], k=1, weights=[node.team2.seed, node.team1.seed])[0]
 
     return node
 
